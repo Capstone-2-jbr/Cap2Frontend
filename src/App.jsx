@@ -8,48 +8,8 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
-import { getYouTubeVideoId } from "./utils/getVideoIdFromUrl";
-import YouTube from "react-youtube";
+import MusicPlayer from "./components/MusicPlayer";
 import { API_URL } from "./shared";
-
-const MusicPlayer = () => {
-  const [url, setUrl] = useState("");
-  const [videoId, setVideoId] = useState(null);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const id = getYouTubeVideoId(url);
-    if (id) {
-      setVideoId(id);
-    } else {
-      alert("Invalid YouTube URL");
-    }
-  };
-
-  const opts = {
-    height: "390",
-    width: "640",
-    playerVars: {
-      autoplay: 1,
-    },
-  };
-
-  return (
-    <div className="music-player-page">
-      <h2>Music Player</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Paste YouTube link"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-        />
-        <button type="submit">Play</button>
-      </form>
-      {videoId && <YouTube videoId={videoId} opts={opts} />}
-    </div>
-  );
-};
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -90,7 +50,7 @@ const App = () => {
       <NavBar user={user} onLogout={handleLogout} />
       <div className="app">
         <Routes>
-          <Route path="/music" element={<MusicPlayer />} />
+          <Route path="/MusicPlayer" element={<MusicPlayer/>} />
           <Route path="/login" element={<Login setUser={setUser} />} />
           <Route path="/signup" element={<Signup setUser={setUser} />} />
           <Route exact path="/" element={<Home />} />
