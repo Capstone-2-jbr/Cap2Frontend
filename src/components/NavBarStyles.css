@@ -1,15 +1,24 @@
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+ .navbar {
   position: sticky;
   top: 0;
   z-index: 100;
   background-color: #f8f9fa;
   padding: 1rem 2rem;
   border-bottom: 1px solid #e9ecef;
+  position: relative;
+  min-height: 64px;
+  
+  position: relative;
+ }
+.sociac{
+  text-align: top;
 }
 
+.nav-brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%); 
+}
 .nav-brand a {
   font-size: 1.5rem;
   font-weight: bold;
@@ -23,6 +32,11 @@
 
 .nav-links {
   display: flex;
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  gap: 1rem;
   align-items: center;
 }
 
@@ -34,6 +48,7 @@
 
 .nav-link {
   color: #666;
+  text-align: right;
   text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;

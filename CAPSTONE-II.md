@@ -1,4 +1,4 @@
-# 📊 Capstone I: Working Together
+# 📊 Capstone II: Working Together
 
 ## Working with TAs
 
