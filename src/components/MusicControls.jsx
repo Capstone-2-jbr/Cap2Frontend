@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-//import "./MusicControls.css";
+import "./MusicControls.css";
 
-const MusicControls = ({ playerRef }) => {
+const MusicControls = ({ playerRef, onToggleRepeat, onToggleShuffle, isRepeat, isShuffle }) => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(100);
-  const [prevVolume, setPrevVolume] = useState(100); 
+  const [prevVolume, setPrevVolume] = useState(100);
 
   const togglePlayPause = () => {
     if (!playerRef.current) return;
@@ -91,6 +91,20 @@ const MusicControls = ({ playerRef }) => {
         value={volume}
         onChange={handleVolumeChange}
       />
+
+      <button
+        onClick={onToggleRepeat}
+        style={{ fontWeight: isRepeat ? "bold" : "normal" }}
+      >
+        🔁 Repeat
+      </button>
+
+      <button
+        onClick={onToggleShuffle}
+        style={{ fontWeight: isShuffle ? "bold" : "normal" }}
+      >
+        🔀 Shuffle
+      </button>
     </div>
   );
 };

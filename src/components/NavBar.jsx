@@ -20,6 +20,9 @@ const NavBar = ({ user, onLogout }) => {
           </div>
         ) : (
           <div className="auth-links">
+            <Link to="/MusicPlayer" className="nav-link">
+            Music Player
+            </Link>
             <Link to="/login" className="nav-link">
               Login
             </Link>
