@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./MusicControls.css";
+//import "./MusicControls.css";
 
 const MusicControls = ({ playerRef, onToggleRepeat, onToggleShuffle, isRepeat, isShuffle }) => {
   const [isPlaying, setIsPlaying] = useState(true);
