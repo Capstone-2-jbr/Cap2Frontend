@@ -1,47 +1,92 @@
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import "../AppStyles.css";
 import { Link } from "react-router-dom";
 
 const Home = () => {
+  const cardsRef = useRef([]);
+  const [visibleCards, setVisibleCards] = useState([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Number(entry.target.dataset.index);
+            setTimeout(() => {
+              setVisibleCards((prev) => [...new Set([...prev, index])]);
+            }, index * 150);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    cardsRef.current.forEach((card) => {
+      if (card) observer.observe(card);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const cardData = [
+    {
+      title: "Music Player 🎵",
+      desc:
+        "Listen to your favorite songs via a link. You can also save your songs to a playlist.",
+      link: "/MusicPlayer",
+      button: "Listen to your heart's content",
+    },
+    {
+      title: "Social Media 💬",
+      desc:
+        "Share photos, videos, and music taste with other users of Sociac!",
+      button: "Socialize with friends",
+    },
+    {
+      title: "Shop 🛒",
+      desc:
+        "Shop for vintage CDs, mixtapes, and even sell your own music onto the platform!",
+      button: "View offers",
+    },
+  ];
   return (
     <>
     <div className="description-container">
-      <div className="card">
+      <div className="description-card">
         <h2>Welcome to Sociac!</h2>
-        <p>This platform offers you the ability to use a music player, social media, and shop for all your music needs.
-          This site will also allow you to play music and have it still play when your browsing other pages.
+        <p>
+          Sociac is your all-in-one space for music, socializing, and shopping. 
+          Queue up your favorite tracks and keep them playing as you browse other pages. 
+          Post, connect, explore — and even shop for cool music-related merch and collectibles. 
+          It's your vibe, uninterrupted.
         </p>
       </div>
     </div>
     
     <div className="card-container">
-      <div className="card-grid">
-      <div className="card">
-        <h2>Music Player</h2>
-        <p>Listen to your favorite songs via a link. You can also save your songs to a playlists if you'd like.</p>
-        <button><Link to="/MusicPlayer">
-        Listen to your hearts content
-        </Link>
-        </button>
-      </div>
-    </div>
-     <div>
-      <div className="card">
-        <h2>Social Media</h2>
-        <p>Share photos, videos, and music taste with other users of Sociac!</p>
-        <button>Socialize with friends</button>
-      </div>
+  <div className="card-grid">
+    {cardData.map((card, index) => (
+      <div
+        key={index}
+        data-index={index}
+        ref={(el) => (cardsRef.current[index] = el)}
+        className={`card ${visibleCards.includes(index) ? "visible" : ""}`}
+      >
+        <h2>{card.title}</h2>
+        <p>{card.desc}</p>
 
-    </div>
-     <div>
-      <div className="card">
-        <h2>Shop</h2>
-        <p>Shop for vintage cds, mixtapes, and even sell your own music onto the platform!</p>
-        <button>View offers</button>
+        {card.link ? (
+          <Link to={card.link} className="card-button">
+            {card.button}
+          </Link>
+        ) : (
+          <span className="card-button">{card.button}</span>
+        )}
       </div>
-    </div>
-
-    </div>
+    ))}
+  </div>
+</div>
     </>
   );
 };

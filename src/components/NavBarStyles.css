@@ -24,10 +24,13 @@
   font-weight: bold;
   color: #333;
   text-decoration: none;
+  transition: all 0.3s;
+  border-radius: 4px;
 }
 
 .nav-brand a:hover {
   color: #007bff;
+  background-color: #e9ecef;
 }
 
 .nav-links {

@@ -8,69 +8,7 @@
 body {
   background-image: linear-gradient(#08a1f4, #00136a);
 }
-.description-container{
-  max-width: 600px;
-  margin: 3rem auto 2rem;
-  padding: 0 1 rem;
-  display: flex;
-  flex-wrap: wrap;
-}
-.description-container div{
-  background-color: aliceblue;
-}
-.description-container .card{
-  margin: 0 auto;
-}
-.description-title h2{
-  text-align: justify;
-}
-.description{
-  width: 300px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-}
-.description:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
 
-.card-container{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-.card-container div{
-  height: fit-content;
-    background-color: aliceblue;
-}
-.card-grid{
-  display: grid;
-  grid-template-columns: repeat (3, 1fr);
-  gap: 20px;
-}
-.card{
-  width: 300px;
-  padding: 1.5rem;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-}
-.card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.card img {
-    width: 100%;
-    border-radius: 4px;
-}
-
-.card-content h2 {
-    font-size: 24px;
-    margin-top: 10px;
-}
 .title {
   color: #ffffff;
   font-size: 3rem;
@@ -78,6 +16,124 @@ body {
   text-align: center;
   margin-bottom: 2rem;
 }
+
+.description-container {
+  position: relative;
+  top: -50px;
+  max-width: 1000px;
+  margin: 3rem auto 2rem;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  border: 1px solid #010029;
+  border: 2px solid #000;
+  border-radius: 10px;
+  background-color: hsl(208, 100%, 97%);
+}
+
+.description-card {
+  width: 100%;
+  max-width: 900px;
+  padding: 2rem;
+  background-color: hsl(208, 100%, 97%);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  transition: box-shadow 0.3s ease-in-out;
+}
+.description-card:hover{
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.description-card h2 {
+  padding: 1rem;
+  text-align: center;
+}
+
+.description-card p {
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+  margin-top: 0.5rem;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  gap: 20px;
+}
+
+.card {
+  height: 100%;
+  min-height: 200px;
+  width: 300px;
+  padding: 1.5rem;
+  background-color: aliceblue;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: box-shadow 0.3s ease, opacity 0.6s ease, transform 0.6s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+.card h2{
+  margin-bottom: 1rem;
+}
+
+.card.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 4px;
+}
+.card-button {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #00136a;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card-button:hover {
+  background-color: #0040a3;
+}
+
+.card a {
+  color: white;
+  text-decoration: none;
+}
+
 
 .app {
   display: flex;
