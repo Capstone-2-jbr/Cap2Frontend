@@ -9,7 +9,6 @@ import Signup from "./components/Signup";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import MusicPlayer from "./components/MusicPlayer";
-import MusicControls from "./components/MusicControls";
 import { API_URL } from "./shared";
 
 const App = () => {
