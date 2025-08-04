@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-//import "./MusicControls.css";
+import "./MusicControls.css";
 
-const MusicControls = ({ playerRef, onToggleRepeat, onToggleShuffle, isRepeat, isShuffle }) => {
+const MusicControls = ({ playerRef }) => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(100);
   const [prevVolume, setPrevVolume] = useState(100);
+  const [isRepeat, setIsRepeat] = useState(false);
+  const [isShuffle, setIsShuffle] = useState(false);
+
+  const player = playerRef?.current;
 
   const togglePlayPause = () => {
-    if (!playerRef.current) return;
-    const player = playerRef.current;
+    if (!player) return;
     const state = player.getPlayerState();
-
     if (state === 1) {
       player.pauseVideo();
       setIsPlaying(false);
@@ -22,9 +24,7 @@ const MusicControls = ({ playerRef, onToggleRepeat, onToggleShuffle, isRepeat, i
   };
 
   const toggleMute = () => {
-    if (!playerRef.current) return;
-    const player = playerRef.current;
-
+    if (!player) return;
     if (isMuted) {
       player.unMute();
       player.setVolume(prevVolume);
@@ -40,12 +40,8 @@ const MusicControls = ({ playerRef, onToggleRepeat, onToggleShuffle, isRepeat, i
   const handleVolumeChange = (e) => {
     const newVolume = parseInt(e.target.value);
     setVolume(newVolume);
-
-    if (!playerRef.current) return;
-    const player = playerRef.current;
-
+    if (!player) return;
     player.setVolume(newVolume);
-
     if (newVolume === 0) {
       player.mute();
       setIsMuted(true);
@@ -57,54 +53,53 @@ const MusicControls = ({ playerRef, onToggleRepeat, onToggleShuffle, isRepeat, i
   };
 
   const skipForward = () => {
-    if (playerRef.current) {
-      const player = playerRef.current;
-      const currentTime = player.getCurrentTime();
-      player.seekTo(currentTime + 10, true);
-    }
+    if (player) player.seekTo(player.getCurrentTime() + 10, true);
   };
 
   const skipBackward = () => {
-    if (playerRef.current) {
-      const player = playerRef.current;
-      const currentTime = player.getCurrentTime();
-      player.seekTo(Math.max(0, currentTime - 10), true);
-    }
+    if (player) player.seekTo(Math.max(0, player.getCurrentTime() - 10), true);
   };
 
+  const toggleRepeat = () => setIsRepeat(!isRepeat);
+  const toggleShuffle = () => setIsShuffle(!isShuffle);
+
   return (
-    <div className="music-controls">
-      <button onClick={skipBackward}>⏪ 10s</button>
-      <button onClick={togglePlayPause}>
-        {isPlaying ? "⏸ Pause" : "▶️ Play"}
-      </button>
-      <button onClick={skipForward}>⏩ 10s</button>
+    <div className="music-controls-container">
+      <div className="controls-row main-controls">
+        <button onClick={skipBackward}>⏮</button>
+        <button onClick={togglePlayPause}>
+          {isPlaying ? "⏸" : "▶️"}
+        </button>
+        <button onClick={skipForward}>⏭</button>
+      </div>
 
-      <button onClick={toggleMute}>
-        {isMuted ? "🔈 Unmute" : "🔇 Mute"}
-      </button>
+      <div className="controls-row toggle-controls">
+        <button
+          onClick={toggleShuffle}
+          className={isShuffle ? "active" : ""}
+        >
+          🔀
+        </button>
+        <button
+          onClick={toggleRepeat}
+          className={isRepeat ? "active" : ""}
+        >
+          🔁
+        </button>
+        <button onClick={toggleMute}>
+          {isMuted ? "🔈" : "🔇"}
+        </button>
+      </div>
 
-      <input
-        type="range"
-        min="0"
-        max="100"
-        value={volume}
-        onChange={handleVolumeChange}
-      />
-
-      <button
-        onClick={onToggleRepeat}
-        style={{ fontWeight: isRepeat ? "bold" : "normal" }}
-      >
-        🔁 Repeat
-      </button>
-
-      <button
-        onClick={onToggleShuffle}
-        style={{ fontWeight: isShuffle ? "bold" : "normal" }}
-      >
-        🔀 Shuffle
-      </button>
+      <div className="controls-row volume-control">
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={volume}
+          onChange={handleVolumeChange}
+        />
+      </div>
     </div>
   );
 };
