@@ -13,6 +13,18 @@
 .sociac{
   text-align: top;
 }
+.nav-dropdown-link {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.nav-dropdown-link:hover {
+  background-color: #f5f5f5;
+}
 
 .nav-brand {
   position: absolute;
@@ -51,7 +63,7 @@
 
 .nav-link {
   color: #666;
-  text-align: right;
+  text-align: left;
   text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
