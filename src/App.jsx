@@ -59,6 +59,9 @@ const App = () => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
+      <footer className="footer">
+          <p>&copy; {new Date().getFullYear()} Sociac. All rights reserved.</p>
+        </footer>
     </div>
   );
 };

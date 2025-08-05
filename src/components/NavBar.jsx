@@ -31,121 +31,61 @@ const NavBar = ({ user, onLogout }) => {
   }, []);
 
   return (
-    <nav className="navbar">
-      <div className="nav-brand">
-        <Link to="/">Sociac</Link>
-      </div>
+  <nav className="navbar">
+  {/* LEFT: Brand */}
+  <div className="nav-left">
+    <Link to="/" className="nav-brand jewels-font">
+      Sociac
+    </Link>
+  </div>
 
-      <div className="nav-links">
-        <div style={{ position: "relative" }}>
-          <div
-            ref={iconRef}
-            onClick={toggleDropdown}
-            style={{ cursor: "pointer" }}
-          >
-            <img
-              ref={iconRef}
-              onClick={toggleDropdown}
-              src={
-                user && user.profileImageUrl
-                  ? user.profileImageUrl
-                  : "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
-              }
-              alt="User Avatar"
-              style={{
-                width: "40px",
-                height: "40px",
-                borderRadius: "50%",
-                objectFit: "cover",
-                cursor: "pointer",
-              }}
-            />
-          </div>
-          {isOpen && (
-            <div
-              ref={dropdownRef}
-              style={{
-                position: "absolute",
-                top: "45px",
-                right: "0",
-                backgroundColor: "#fff",
-                border: "1px solid #ddd",
-                borderRadius: "8px",
-                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
-                zIndex: 1000,
-                width: "260px",
-                padding: "1rem",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  marginBottom: "1rem",
-                }}
-              >
-                <img
-                  src={
-                    user?.profileImageUrl ||
-                    "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
-                  }
-                  alt="Profile"
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    borderRadius: "50%",
-                    objectFit: "cover",
-                    marginRight: "0.75rem",
-                  }}
-                />
-                <div>
-                  <strong style={{ display: "block" }}>
-                    {user?.username || "Guest"}
-                  </strong>
-                  <span style={{ fontSize: "0.875rem", color: "#666" }}>
-                    {user?.email || "Not logged in"}
-                  </span>
-                </div>
-              </div>
-              {user ? (
-                <>
-                  <Link to="/profile" className="nav-dropdown-link">
-                    ✏️ Edit Profile
-                  </Link>
-                  <button
-                    onClick={onLogout}
-                    className="nav-dropdown-link"
-                    style={{
-                      background: "none",
-                      border: "none",
-                      textAlign: "left",
-                      width: "100%",
-                      cursor: "pointer",
-                      padding: "0.75rem 1rem",
-                    }}
-                  >
-                    🚪 Log Out
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Link to="/MusicPlayer" className="nav-dropdown-link">
-                    🎵 Music Player
-                  </Link>
-                  <Link to="/login" className="nav-dropdown-link">
-                    🔐 Login
-                  </Link>
-                  <Link to="/signup" className="nav-dropdown-link">
-                    ✍️ Sign Up
-                  </Link>
-                </>
-              )}
-            </div>
-          )}
+  {/* CENTER: Links */}
+  <div className="nav-center">
+    <Link to="/musicplayer" className="nav-link">Music Player</Link>
+    <Link to="/socialmedia" className="nav-link">Social Media</Link>
+    <Link to="/shop" className="nav-link">Shop</Link>
+  </div>
+
+  {/* RIGHT: Profile Icon and Dropdown */}
+  <div className="nav-right">
+    <img
+      ref={iconRef}
+      onClick={toggleDropdown}
+      className="profile-icon"
+      src={
+        user?.profileImageUrl ||
+        "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+      }
+      alt="Profile"
+    />
+
+    {isOpen && (
+      <div ref={dropdownRef} className="dropdown-menu">
+        <div className="user-info">
+          <strong>{user?.username || "Guest"}</strong>
+          <div className="user-email">{user?.email || "Not logged in"}</div>
         </div>
+
+        {user ? (
+          <>
+            <Link to="/profile" className="nav-dropdown-link">✏️ Edit Profile</Link>
+            <button onClick={onLogout} className="nav-dropdown-link logout-btn">
+              🚪 Log Out
+            </button>
+          </>
+        ) : (
+          <>
+            <Link to="/musicplayer" className="nav-dropdown-link">🎵 Music Player</Link>
+            <Link to="/login" className="nav-dropdown-link">🔐 Login</Link>
+            <Link to="/signup" className="nav-dropdown-link">✍️ Sign Up</Link>
+          </>
+        )}
       </div>
-    </nav>
-  );
+    )}
+  </div>
+</nav>
+);
+
 };
 
 export default NavBar;
