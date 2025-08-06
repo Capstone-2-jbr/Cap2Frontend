@@ -1,0 +1,14 @@
+.genie-container {
+  position: fixed;
+  bottom: 2rem;
+  left: 80vw; /* Use a relative unit for better responsiveness */
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.genie-sprite {
+  width: 42px;
+  image-rendering: pixelated;
+  transform: scale(3);
+}
+

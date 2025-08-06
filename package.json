@@ -1,7 +1,8 @@
 {
-  "name": "capstone-1-frontend",
+  "name": "capstone-2-frontend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.js",  
+  "proxy": "http://localhost:8080",
   "scripts": {
     "start": "webpack --mode production",
     "build": "webpack --mode production",

@@ -1,0 +1,85 @@
+/* MusicControls.css */
+
+/* Global wrapper */
+.music-controls-container {
+    background: linear-gradient(145deg, #e8e6e3, #ffffff);
+    border: 2px solid #b3b3b3;
+    border-radius: 12px;
+    padding: 1.5rem;
+    max-width: 500px;
+    margin: 2rem auto;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+    font-family: 'Verdana', sans-serif;
+  }
+  
+  /* Row layout */
+  .controls-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    margin: 0.75rem 0;
+  }
+  
+  /* Main play/pause/skip buttons */
+  .main-controls button {
+    background: linear-gradient(to bottom, #d6d6d6, #f1f1f1);
+    border: 2px solid #a1a1a1;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.5),
+                inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background 0.2s ease;
+  }
+  
+  .main-controls button:hover {
+    background: #cfcfcf;
+  }
+  
+  /* Toggle buttons (shuffle, repeat, mute) */
+  .toggle-controls button {
+    background: linear-gradient(to bottom, #bcd9ea, #e0f0f9);
+    border: 1px solid #7ba4c5;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .toggle-controls button.active {
+    background: linear-gradient(to bottom, #005288, #007cc7);
+    color: white;
+    border-color: #00406f;
+  }
+  
+  /* Volume control slider */
+  .volume-control input[type="range"] {
+    width: 150px;
+    background: transparent;
+  }
+  
+  .volume-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #007cc7;
+    cursor: pointer;
+    border: 1px solid #333;
+    margin-top: -4px;
+  }
+  
+  .volume-control input[type="range"]::-webkit-slider-runnable-track {
+    height: 8px;
+    border-radius: 4px;
+    background: #cfcfcf;
+  }
+  
+  .volume-control input[type="range"]:focus {
+    outline: none;
+  }
+  
