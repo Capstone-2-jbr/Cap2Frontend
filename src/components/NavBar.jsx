@@ -31,58 +31,74 @@ const NavBar = ({ user, onLogout }) => {
   }, []);
 
   return (
-  <nav className="navbar">
-  <div className="nav-left">
-    <Link to="/" className="nav-brand jewels-font">
-      Sociac
-    </Link>
-  </div>
+    <nav className="navbar">
+      <div className="nav-left">
+        <Link to="/" className="nav-brand jewels-font">
+          Sociac
+        </Link>
+      </div>
 
-  <div className="nav-center">
-    <Link to="/musicplayer" className="nav-link">Music Player</Link>
-    <Link to="/socialmedia" className="nav-link">Social Media</Link>
-    <Link to="/shop" className="nav-link">Shop</Link>
-  </div>
+      <div className="nav-center">
+        <Link to="/musicplayer" className="nav-link">
+          Music Player
+        </Link>
+        <Link to="/socialmedia" className="nav-link">
+          Social Media
+        </Link>
+        <Link to="/shop" className="nav-link">
+          Shop
+        </Link>
+      </div>
 
-  <div className="nav-right">
-    <img
-      ref={iconRef}
-      onClick={toggleDropdown}
-      className="profile-icon"
-      src={
-        user?.profileImageUrl ||
-        "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
-      }
-      alt="Profile"
-    />
+      <div className="nav-right">
+        <img
+          ref={iconRef}
+          onClick={toggleDropdown}
+          className="profile-icon"
+          src={
+            user?.profile_picture ||
+            "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+          }
+          alt="ProfilePicture"
+        />
 
-    {isOpen && (
-      <div ref={dropdownRef} className="dropdown-menu">
-        <div className="user-info">
-          <strong>{user?.username || "Guest"}</strong>
-          <div className="user-email">{user?.email || "Not logged in"}</div>
-        </div>
+        {isOpen && (
+          <div ref={dropdownRef} className="dropdown-menu">
+            <div className="user-info">
+              <strong>{user?.username || "Guest"}</strong>
+              <div className="user-email">{user?.email || "Not logged in"}</div>
+            </div>
 
-        {user ? (
-          <>
-            <Link to="/profile" className="nav-dropdown-link">✏️ View Profile</Link>
-            <button onClick={onLogout} className="nav-dropdown-link logout-btn">
-              🚪 Log Out
-            </button>
-          </>
-        ) : (
-          <>
-            <Link to="/musicplayer" className="nav-dropdown-link">🎵 Music Player</Link>
-            <Link to="/login" className="nav-dropdown-link">🔐 Login</Link>
-            <Link to="/signup" className="nav-dropdown-link">✍️ Sign Up</Link>
-          </>
+            {user ? (
+              <>
+                <Link to="/profile" className="nav-dropdown-link">
+                  ✏️ View Profile
+                </Link>
+                <button
+                  onClick={onLogout}
+                  className="nav-dropdown-link logout-btn"
+                >
+                  🚪 Log Out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/musicplayer" className="nav-dropdown-link">
+                  🎵 Music Player
+                </Link>
+                <Link to="/login" className="nav-dropdown-link">
+                  🔐 Login
+                </Link>
+                <Link to="/signup" className="nav-dropdown-link">
+                  ✍️ Sign Up
+                </Link>
+              </>
+            )}
+          </div>
         )}
       </div>
-    )}
-  </div>
-</nav>
-);
-
+    </nav>
+  );
 };
 
 export default NavBar;

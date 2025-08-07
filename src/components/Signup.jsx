@@ -58,6 +58,15 @@ const Signup = ({ setUser }) => {
       );
 
       setUser(response.data.user);
+      try {
+        const userResponse = await axios.get(`${API_URL}/auth/me`, {
+          withCredentials: true,
+        });
+        setUser(userResponse.data.user);
+      } catch (fetchError) {
+        console.log("Could not fetch updated user data:", fetchError);
+      }
+      
       navigate("/");
     } catch (error) {
       if (error.response?.data?.error) {
