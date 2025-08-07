@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./MusicDetails.css";
+import "./css/MusicDetails.css";
 import { API_URL } from "../shared";
 
 const MusicDetails = ({ videoId }) => {
@@ -13,7 +13,9 @@ const MusicDetails = ({ videoId }) => {
 
     const fetchVideoDetails = async () => {
       try {
-        const response = await axios.get(`${API_URL}/api/video-details/${videoId}`);
+        const response = await axios.get(
+          `${API_URL}/api/video-details/${videoId}`
+        );
         setDetails(response.data);
         setError("");
       } catch (error) {
@@ -32,7 +34,6 @@ const MusicDetails = ({ videoId }) => {
 
   return (
     <div className="music-details">
-      <img src={thumbnails?.medium?.url} alt="Thumbnail" />
       <div className="info">
         <h2>{title}</h2>
         <p>By: {channelTitle}</p>
