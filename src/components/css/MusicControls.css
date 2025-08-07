@@ -1,85 +1,132 @@
-/* MusicControls.css */
+:root {
+  --bg-color: #fafafa;
+  --text-color: #222;
+  --primary-color: #0d8ddb;
+  --button-bg: #e0e0e0;
+  --button-hover-bg: #c0c0c0;
+  --progress-bg: #ddd;
+  --progress-fill: #0d8ddb;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
 
-/* Global wrapper */
+.dark-mode {
+  --bg-color: #1e1e1e;
+  --text-color: #eee;
+  --primary-color: #0d8ddb;
+  --button-bg: #2d2d2d;
+  --button-hover-bg: #444;
+  --progress-bg: #444;
+  --progress-fill: #0d8ddb;
+  --shadow-color: rgba(0, 0, 0, 0.6);
+}
+
 .music-controls-container {
-    background: linear-gradient(145deg, #e8e6e3, #ffffff);
-    border: 2px solid #b3b3b3;
-    border-radius: 12px;
-    padding: 1.5rem;
-    max-width: 500px;
-    margin: 2rem auto;
-    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
-    font-family: 'Verdana', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 320px;
+  background: var(--bg-color);
+  padding: 16px;
+  border-radius: 12px;
+  color: var(--text-color);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  user-select: none;
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.main-controls button,
+.toggle-controls button,
+.queue-controls button {
+  background: var(--button-bg);
+  border: none;
+  color: var(--text-color);
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-width: 48px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.main-controls button:hover,
+.toggle-controls button:hover,
+.queue-controls button:hover {
+  background: var(--button-hover-bg);
+}
+
+.toggle-controls button.active {
+  background: var(--primary-color);
+  color: white;
+  box-shadow: 0 0 6px var(--primary-color);
+}
+
+.volume-control input[type="range"] {
+  width: 100%;
+  height: 6px;
+  background: var(--progress-bg);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.volume-control input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: var(--primary-color);
+  cursor: pointer;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 0 5px var(--primary-color);
+  margin-top: -6px;
+  transition: background-color 0.3s ease;
+}
+
+.volume-control input[type="range"]:hover::-webkit-slider-thumb {
+  background: #0890ff;
+  box-shadow: 0 0 8px #0890ff;
+}
+
+.volume-control input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: var(--primary-color);
+  cursor: pointer;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 0 5px var(--primary-color);
+  transition: background-color 0.3s ease;
+}
+
+.volume-control input[type="range"]:hover::-moz-range-thumb {
+  background: #0890ff;
+  box-shadow: 0 0 8px #0890ff;
+}
+
+.queue-controls button {
+  flex: 1;
+  max-width: 140px;
+  font-size: 1rem;
+}
+
+@media (max-width: 360px) {
+  .music-controls-container {
+    width: 100%;
+    padding: 12px;
   }
-  
-  /* Row layout */
-  .controls-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1.2rem;
-    margin: 0.75rem 0;
+
+  .main-controls button,
+  .toggle-controls button,
+  .queue-controls button {
+    font-size: 1.2rem;
+    padding: 8px 12px;
   }
-  
-  /* Main play/pause/skip buttons */
-  .main-controls button {
-    background: linear-gradient(to bottom, #d6d6d6, #f1f1f1);
-    border: 2px solid #a1a1a1;
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    font-size: 20px;
-    cursor: pointer;
-    box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 0.5),
-                inset 2px 2px 5px rgba(0, 0, 0, 0.1);
-    transition: background 0.2s ease;
-  }
-  
-  .main-controls button:hover {
-    background: #cfcfcf;
-  }
-  
-  /* Toggle buttons (shuffle, repeat, mute) */
-  .toggle-controls button {
-    background: linear-gradient(to bottom, #bcd9ea, #e0f0f9);
-    border: 1px solid #7ba4c5;
-    border-radius: 8px;
-    padding: 6px 12px;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .toggle-controls button.active {
-    background: linear-gradient(to bottom, #005288, #007cc7);
-    color: white;
-    border-color: #00406f;
-  }
-  
-  /* Volume control slider */
-  .volume-control input[type="range"] {
-    width: 150px;
-    background: transparent;
-  }
-  
-  .volume-control input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-    background: #007cc7;
-    cursor: pointer;
-    border: 1px solid #333;
-    margin-top: -4px;
-  }
-  
-  .volume-control input[type="range"]::-webkit-slider-runnable-track {
-    height: 8px;
-    border-radius: 4px;
-    background: #cfcfcf;
-  }
-  
-  .volume-control input[type="range"]:focus {
-    outline: none;
-  }
-  
+}

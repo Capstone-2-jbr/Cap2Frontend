@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import "./css/MusicControls.css";
 
-const MusicControls = ({ playerRef }) => {
-  const [isPlaying, setIsPlaying] = useState(true);
+const MusicControls = ({
+  playerRef,
+  isPlaying,
+  setIsPlaying,
+  onToggleRepeat,
+  onToggleShuffle,
+  isRepeat,
+  isShuffle,
+}) => {
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(100);
   const [prevVolume, setPrevVolume] = useState(100);
-  const [isRepeat, setIsRepeat] = useState(false);
-  const [isShuffle, setIsShuffle] = useState(false);
 
   const player = playerRef?.current;
 
@@ -16,10 +21,10 @@ const MusicControls = ({ playerRef }) => {
     const state = player.getPlayerState();
     if (state === 1) {
       player.pauseVideo();
-      setIsPlaying(false);
+      setIsPlaying(false);  
     } else {
       player.playVideo();
-      setIsPlaying(true);
+      setIsPlaying(true);   
     }
   };
 
@@ -60,9 +65,6 @@ const MusicControls = ({ playerRef }) => {
     if (player) player.seekTo(Math.max(0, player.getCurrentTime() - 10), true);
   };
 
-  const toggleRepeat = () => setIsRepeat(!isRepeat);
-  const toggleShuffle = () => setIsShuffle(!isShuffle);
-
   return (
     <div className="music-controls-container">
       <div className="controls-row main-controls">
@@ -75,13 +77,13 @@ const MusicControls = ({ playerRef }) => {
 
       <div className="controls-row toggle-controls">
         <button
-          onClick={toggleShuffle}
+          onClick={onToggleShuffle}
           className={isShuffle ? "active" : ""}
         >
           🔀
         </button>
         <button
-          onClick={toggleRepeat}
+          onClick={onToggleRepeat}
           className={isRepeat ? "active" : ""}
         >
           🔁
