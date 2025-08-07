@@ -1,24 +1,25 @@
 :root {
-    --bg-color: #f9f9f9;
-    --text-color: #000;
-    --card-bg: #ffffff;
-    --active-bg: #e0f7fa;
-    --border-color: #ddd;
-  }
-  
+  --bg-color: #f9f9f9;
+  --text-color: #000;
+  --card-bg: #ffffff;
+  --active-bg: #e0f7fa;
+  --border-color: #ddd;
+}
+
 .dark-mode {
-    --bg-color: #1a1a1a;
-    --text-color: #f0f0f0;
-    --card-bg: #2a2a2a;
-    --active-bg: #334f5c;
-    --border-color: #444;
-  }
-  
+  --bg-color: #1a1a1a;
+  --text-color: #f0f0f0;
+  --card-bg: #2a2a2a;
+  --active-bg: #334f5c;
+  --border-color: #444;
+}
+
 .queue-container {
   max-width: 500px;
   margin: 2rem auto;
   padding: 1.5rem;
-  background: #f9f9f9;
+  background: var(--card-bg);
+  color: var(--text-color);
   border-radius: 16px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   font-family: "Verdana", sans-serif;
@@ -41,17 +42,21 @@
   max-height: 200px;
   overflow-y: auto;
 }
-.queue-list li.active {
-  background: #e0f7fa;
-  font-weight: bold;
-}
+
 .queue-list li {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0.75rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-color);
   transition: background 0.2s ease;
+}
+
+.queue-list li.active {
+  background: var(--active-bg);
+  font-weight: bold;
 }
 
 .track-title {
@@ -66,6 +71,7 @@
   border: none;
   font-size: 1rem;
   opacity: 0.7;
+  color: var(--text-color);
   transition: opacity 0.2s ease;
 }
 
