@@ -65,7 +65,7 @@ const NavBar = ({ user, onLogout }) => {
 
         {user ? (
           <>
-            <Link to="/profile" className="nav-dropdown-link">✏️ Edit Profile</Link>
+            <Link to="/profile" className="nav-dropdown-link">✏️ View Profile</Link>
             <button onClick={onLogout} className="nav-dropdown-link logout-btn">
               🚪 Log Out
             </button>

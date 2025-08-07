@@ -1,7 +1,46 @@
-.socialcontainer{
-     padding: 2rem; 
+.socialcontainer {
+  padding: 2rem;
 }
-.searchbar{
+
+.searchbar {
+  margin-bottom: 1.5rem;
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+.socialgrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.noposts {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+.CreatePost {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background-color: #00136a;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
 
 
+.socialcard {
+  border: none;
+  border-radius: 8px;
+  padding: 1rem;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.socialcontent {
+  margin-top: 8px;
 }
