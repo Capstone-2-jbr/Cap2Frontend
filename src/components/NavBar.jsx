@@ -32,21 +32,18 @@ const NavBar = ({ user, onLogout }) => {
 
   return (
   <nav className="navbar">
-  {/* LEFT: Brand */}
   <div className="nav-left">
     <Link to="/" className="nav-brand jewels-font">
       Sociac
     </Link>
   </div>
 
-  {/* CENTER: Links */}
   <div className="nav-center">
     <Link to="/musicplayer" className="nav-link">Music Player</Link>
     <Link to="/socialmedia" className="nav-link">Social Media</Link>
     <Link to="/shop" className="nav-link">Shop</Link>
   </div>
 
-  {/* RIGHT: Profile Icon and Dropdown */}
   <div className="nav-right">
     <img
       ref={iconRef}
@@ -68,7 +65,7 @@ const NavBar = ({ user, onLogout }) => {
 
         {user ? (
           <>
-            <Link to="/profile" className="nav-dropdown-link">✏️ Edit Profile</Link>
+            <Link to="/profile" className="nav-dropdown-link">✏️ View Profile</Link>
             <button onClick={onLogout} className="nav-dropdown-link logout-btn">
               🚪 Log Out
             </button>
