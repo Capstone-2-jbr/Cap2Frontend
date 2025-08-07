@@ -2,11 +2,19 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Raleway", sans-serif;
+  font-family: "Jewels", sans-serif;
+  letter-spacing: 2px;
+}
+@font-face {
+  font-family: "Jewels";
+  src: url("/fonts/Jewels.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 body {
   background-image: linear-gradient(#08a1f4, #00136a);
+  font-size:  20px;
 }
 
 .title {
@@ -19,7 +27,7 @@ body {
 
 .description-container {
   position: relative;
-  top: -50px;
+  top: -30px;
   max-width: 1000px;
   margin: 3rem auto 2rem;
   padding: 0 2rem;
@@ -56,7 +64,7 @@ body {
 
 .description-card p {
   text-align: center;
-  font-size: 1.1rem;
+  font-size: 20px;
   line-height: 1.8;
   color: #333;
   margin-top: 0.5rem;
@@ -151,9 +159,18 @@ body {
     transform: rotate(360deg);
   }
 }
-
-.react-logo {
-  width: 100px;
-  height: 100px;
-  animation: spin 15s linear infinite;
+.footer {
+  width: 100%;
+  padding: 1rem 2rem;
+  color: #ffffff;
+  text-align: center;
+  border: none;
+  background-color: #00136a;
+  font-size: 0.9rem;
+  margin-top: 4rem;
+  transition: 0.3s;
 }
+.footer:hover{
+  background-color: #025aac;
+}
+

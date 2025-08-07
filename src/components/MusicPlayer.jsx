@@ -3,7 +3,7 @@ import YouTube from "react-youtube";
 import MusicControls from "../components/MusicControls";
 import MusicDetails from "./MusicDetails";
 import { getYouTubeVideoId } from "../utils/getVideoIdFromUrl";
-import "./MusicPlayer.css";
+import "./css/MusicPlayer.css";
 
 const MusicPlayer = () => {
   const [url, setUrl] = useState("");
