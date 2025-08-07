@@ -41,6 +41,7 @@ const Home = () => {
       title: "Social Media 💬",
       desc:
         "Share photos, videos, and music taste with other users of Sociac!",
+      link: "/SocialMedia",
       button: "Socialize with friends",
     },
     {

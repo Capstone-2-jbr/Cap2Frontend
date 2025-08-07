@@ -9,6 +9,7 @@ import Signup from "./components/Signup";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import MusicPlayer from "./components/MusicPlayer";
+import SocialMedia from "./components/SocialMedia";
 import { API_URL } from "./shared";
 
 const App = () => {
@@ -51,12 +52,16 @@ const App = () => {
       <div className="app">
         <Routes>
           <Route path="/MusicPlayer" element={<MusicPlayer/>} />
+          <Route path="/SocialMedia" element={<SocialMedia/>} />
           <Route path="/login" element={<Login setUser={setUser} />} />
           <Route path="/signup" element={<Signup setUser={setUser} />} />
           <Route exact path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
+      <footer className="footer">
+          <p>&copy; {new Date().getFullYear()} Sociac. All rights reserved.</p>
+        </footer>
     </div>
   );
 };

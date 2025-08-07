@@ -1,39 +1,91 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./NavBarStyles.css";
-import "./AuthStyles.css";
+import "./css/NavBarStyles.css";
+import "./css/AuthStyles.css";
 
 const NavBar = ({ user, onLogout }) => {
-  return (
-    <nav className="navbar">
-      <div className="nav-brand">
-        <Link to="/">Sociac</Link>
-      </div>
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const iconRef = useRef(null);
 
-      <div className="nav-links">
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleClickOutside = (event) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target) &&
+      iconRef.current &&
+      !iconRef.current.contains(event.target)
+    ) {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  return (
+  <nav className="navbar">
+  {/* LEFT: Brand */}
+  <div className="nav-left">
+    <Link to="/" className="nav-brand jewels-font">
+      Sociac
+    </Link>
+  </div>
+
+  {/* CENTER: Links */}
+  <div className="nav-center">
+    <Link to="/musicplayer" className="nav-link">Music Player</Link>
+    <Link to="/socialmedia" className="nav-link">Social Media</Link>
+    <Link to="/shop" className="nav-link">Shop</Link>
+  </div>
+
+  {/* RIGHT: Profile Icon and Dropdown */}
+  <div className="nav-right">
+    <img
+      ref={iconRef}
+      onClick={toggleDropdown}
+      className="profile-icon"
+      src={
+        user?.profileImageUrl ||
+        "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+      }
+      alt="Profile"
+    />
+
+    {isOpen && (
+      <div ref={dropdownRef} className="dropdown-menu">
+        <div className="user-info">
+          <strong>{user?.username || "Guest"}</strong>
+          <div className="user-email">{user?.email || "Not logged in"}</div>
+        </div>
+
         {user ? (
-          <div className="user-section">
-            <span className="username">Welcome, {user.username}!</span>
-            <button onClick={onLogout} className="logout-btn">
-              Logout
+          <>
+            <Link to="/profile" className="nav-dropdown-link">✏️ Edit Profile</Link>
+            <button onClick={onLogout} className="nav-dropdown-link logout-btn">
+              🚪 Log Out
             </button>
-          </div>
+          </>
         ) : (
-          <div className="auth-links">
-            <Link to="/MusicPlayer" className="nav-link">
-            Music Player
-            </Link>
-            <Link to="/login" className="nav-link">
-              Login
-            </Link>
-            <Link to="/signup" className="nav-link">
-              Sign Up
-            </Link>
-          </div>
+          <>
+            <Link to="/musicplayer" className="nav-dropdown-link">🎵 Music Player</Link>
+            <Link to="/login" className="nav-dropdown-link">🔐 Login</Link>
+            <Link to="/signup" className="nav-dropdown-link">✍️ Sign Up</Link>
+          </>
         )}
       </div>
-    </nav>
-  );
+    )}
+  </div>
+</nav>
+);
+
 };
 
 export default NavBar;
