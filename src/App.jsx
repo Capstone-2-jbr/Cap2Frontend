@@ -3,18 +3,18 @@ import { createRoot } from "react-dom/client";
 import axios from "axios";
 import "./AppStyles.css";
 import NavBar from "./components/NavBar";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
 import MusicPlayer from "./components/MusicPlayer";
 import SocialMedia from "./components/SocialMedia";
+import CreatePost from "./components/CreatePost";
 import Shop from "./components/Shop";
 import { API_URL } from "./shared";
 
 const App = () => {
-  const location = useLocation();
   const [user, setUser] = useState(null);
 
   const checkAuth = async () => {
@@ -54,7 +54,8 @@ const App = () => {
       <div className="app">
         <Routes>
           <Route path="/MusicPlayer" element={<MusicPlayer/>} />
-          <Route path="/SocialMedia" element={<SocialMedia/>} />
+          <Route path="/socialmedia" element={<SocialMedia/>}/>
+          <Route path ="/socialmedia/createpost" element ={<CreatePost/>} />
           <Route path ="/shop" element={<Shop/>} />
           <Route path="/login" element={<Login setUser={setUser} />} />
           <Route path="/signup" element={<Signup setUser={setUser} />} />

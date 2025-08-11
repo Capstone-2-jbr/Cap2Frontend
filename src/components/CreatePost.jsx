@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import "./css/SocialMedia.css";
 
 const CreatePost = ({ onCreate }) => {
-  const [username, setUsername] = useState("");
+  const [media, setMedia] = useState("");
   const [content, setContent] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!username.trim() || !content.trim()) {
+    if (!media.trim() || !content.trim()) {
       setError("Both fields are required.");
       return;
     }
-    onCreate({ username, content });
-    setUsername("");
+    onCreate({ media, content });
+    setMedia("");
     setContent("");
     setError("");
   };
@@ -24,10 +24,10 @@ const CreatePost = ({ onCreate }) => {
       {error && <div className="error-message">{error}</div>}
       <input
         type="text"
-        placeholder="Your username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        className="create-post-input"
+        placeholder="Link your photo/video."
+        value={media}
+        onChange={(e) => setMedia(e.target.value)}
+        className="create-post-input" rows={2}
       />
       <textarea
         placeholder="What's on your mind?"
