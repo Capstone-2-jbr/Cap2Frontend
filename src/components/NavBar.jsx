@@ -1,12 +1,20 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./css/NavBarStyles.css";
 import "./css/AuthStyles.css";
 
 const NavBar = ({ user, onLogout }) => {
+  const { pathname } = useLocation();
+  const [activePath, setActivePath] = useState(pathname);
+
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const iconRef = useRef(null);
+
+  // Keep activePath in sync with actual route
+  useEffect(() => {
+    setActivePath(pathname);
+  }, [pathname]);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -23,6 +31,7 @@ const NavBar = ({ user, onLogout }) => {
     }
   };
 
+  // Close dropdown on outside click
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -30,22 +39,39 @@ const NavBar = ({ user, onLogout }) => {
     };
   }, []);
 
+  // ✅ Ensures instant highlight change
+  const handleNavClick = (path) => {
+    setActivePath(path);
+  };
+
   return (
     <nav className="navbar">
       <div className="nav-left">
-        <Link to="/" className="nav-brand jewels-font">
+        <Link to="/" className="nav-brand jewels-font" onClick={() => handleNavClick("/")}>
           Sociac
         </Link>
       </div>
 
       <div className="nav-center">
-        <Link to="/musicplayer" className="nav-link">
+        <Link
+          to="/musicplayer"
+          className={`nav-link${activePath === "/musicplayer" ? " active" : ""}`}
+          onClick={() => handleNavClick("/musicplayer")}
+        >
           Music Player
         </Link>
-        <Link to="/socialmedia" className="nav-link">
+        <Link
+          to="/socialmedia"
+          className={`nav-link${activePath === "/socialmedia" ? " active" : ""}`}
+          onClick={() => handleNavClick("/socialmedia")}
+        >
           Social Media
         </Link>
-        <Link to="/shop" className="nav-link">
+        <Link
+          to="/shop"
+          className={`nav-link${activePath === "/shop" ? " active" : ""}`}
+          onClick={() => handleNavClick("/shop")}
+        >
           Shop
         </Link>
       </div>
@@ -56,40 +82,32 @@ const NavBar = ({ user, onLogout }) => {
           onClick={toggleDropdown}
           className="profile-icon"
           src={
-            user?.profile_picture ||
+            user?.profileImageUrl ||
             "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
           }
-          alt="ProfilePicture"
+          alt="Profile"
         />
-
         {isOpen && (
           <div ref={dropdownRef} className="dropdown-menu">
             <div className="user-info">
               <strong>{user?.username || "Guest"}</strong>
               <div className="user-email">{user?.email || "Not logged in"}</div>
             </div>
-
             {user ? (
               <>
-                <Link to="/profile" className="nav-dropdown-link">
+                <Link to="/profile" className="nav-dropdown-link" onClick={() => setIsOpen(false)}>
                   ✏️ View Profile
                 </Link>
-                <button
-                  onClick={onLogout}
-                  className="nav-dropdown-link logout-btn"
-                >
+                <button onClick={onLogout} className="nav-dropdown-link logout-btn">
                   🚪 Log Out
                 </button>
               </>
             ) : (
               <>
-                <Link to="/musicplayer" className="nav-dropdown-link">
-                  🎵 Music Player
-                </Link>
-                <Link to="/login" className="nav-dropdown-link">
+                <Link to="/login" className="nav-dropdown-link" onClick={() => setIsOpen(false)}>
                   🔐 Login
                 </Link>
-                <Link to="/signup" className="nav-dropdown-link">
+                <Link to="/signup" className="nav-dropdown-link" onClick={() => setIsOpen(false)}>
                   ✍️ Sign Up
                 </Link>
               </>

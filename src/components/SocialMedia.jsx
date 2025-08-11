@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import "./css/SocialMedia.css";
 
@@ -24,14 +24,17 @@ const SocialMedia = () => {
   return (
     <div className="socialcontainer">
       <h2>Social Media Feed</h2>
-      <button className="CreatePost">Create Post</button>
-      <input
+      <div className="socialheader">
+        <input
         type="text"
         className="searchbar"
         placeholder="Search..."
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
       />
+      <Link to ="/SocialMedia/CreatePost" className="CreatePost">Create Post</Link>
+      </div>
+      
       <div className="socialgrid">
         {filteredPosts.length === 0 ? (
           <div className="noposts">No posts found.</div>
