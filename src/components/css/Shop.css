@@ -1,131 +1,139 @@
-
+/* ===== Shop Container ===== */
 .shop {
   padding: 2rem;
-  background: #f7f8fa;
-  min-height: vh;
-  border: none;
+  background: #f8f9fc;
+  min-height: 100vh;
   border-radius: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .shop h2 {
   text-align: center;
   font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 2.5rem;
+  margin-bottom: 0.5rem;
   color: #222;
-  letter-spacing: 1px;
 }
+
 .shop h3 {
   text-align: center;
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 1.3rem;
+  font-weight: 500;
   margin-bottom: 2.5rem;
-  color: #222;
-  letter-spacing: 1px;
+  color: #666;
 }
 
+/* ===== Grid Layout ===== */
 .shop-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
   justify-items: center;
-  margin: 0 auto;
   max-width: 1200px;
+  margin: 0 auto;
 }
 
+/* ===== Shop Item Card ===== */
 .shop-item {
   width: 100%;
-  max-width: 320px;
+  max-width: 280px;
   background: #fff;
-  border: 1px solid #e9ecef;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  transition: box-shadow 0.25s, border-color 0.25s, transform 0.18s;
-  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  padding: 1.5rem 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
-  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .shop-item:hover {
-  box-shadow: 0 12px 32px rgba(0,0,0,0.16);
-  border-color: #007bff;
-  transform: translateY(-4px) scale(1.03);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
 }
 
+/* ===== CD-Style Album Art ===== */
 .shop-item img {
-  width: 100%;
-  max-width: 220px;
-  border-radius: 8px;
-  margin-bottom: 1.2rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
   object-fit: cover;
-  aspect-ratio: 1.5/1;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  filter: grayscale(5%) contrast(1.05);
+  opacity: 0.97;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
+.shop-item img:hover {
+  transform: scale(1.06) rotate(2deg);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* ===== Album Title ===== */
 .shop-item-title {
-  font-size: 1.35rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #222;
-  margin-bottom: 0.5rem;
   text-align: center;
-  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
 }
 
+/* ===== Price Tag ===== */
 .shop-item-price {
-  background: #007bff;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 1.1rem;
-  padding: 0.35rem 1.1rem;
+  padding: 0.35rem 1rem;
   border-radius: 20px;
-  box-shadow: 0 1px 4px rgba(0,123,255,0.08);
-  display: inline-block;
+  margin-bottom: 1rem;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
 }
 
+/* ===== Action Button ===== */
 .shop-item-action {
-  background: linear-gradient(90deg, #007bff 60%, #0056b3 100%);
+  background: linear-gradient(135deg, #007bff, #0056b3);
   color: #fff;
   border: none;
-  border-radius: 6px;
-  padding: 0.6rem 1.5rem;
-  font-size: 1.05rem;
+  border-radius: 8px;
+  padding: 0.6rem 1.3rem;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,123,255,0.07);
-  margin-top: auto;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .shop-item-action:hover {
-  background: linear-gradient(90deg, #0056b3 60%, #007bff 100%);
-  box-shadow: 0 4px 16px rgba(0,123,255,0.13);
-  transform: scale(1.04);
+  background: linear-gradient(135deg, #0056b3, #007bff);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  transform: scale(1.05);
+}
+.decade-heading {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #222;
+  position: relative;
 }
 
-@media (max-width: 900px) {
-  .shop-grid {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-  }
-  .shop-item {
-    max-width: 95vw;
-    padding: 1.2rem 0.7rem 1rem 0.7rem;
-  }
+.decade-heading::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  margin: 0.5rem auto 0;
+  border-radius: 2px;
 }
 
+/* ===== Responsive ===== */
 @media (max-width: 600px) {
   .shop {
     padding: 1rem;
   }
   .shop h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1.2rem;
-  }
-  .shop-grid {
-    gap: 1rem;
-    max-width: 100vw;
+    font-size: 1.8rem;
   }
 }

@@ -47,7 +47,7 @@
 }
 
 .create-post-btn {
-  background: linear-gradient(90deg, #007bff 60%, #0056b3 100%);
+  background:#0056b3;
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -55,10 +55,9 @@
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.18s, transform 0.18s;
+  transition:transform 0.18s;
 }
 .create-post-btn:hover {
-  background: linear-gradient(90deg, #007bff 60%, #0056b3 100%);
   transform: scale(1.04);
 }
 
@@ -105,12 +104,13 @@
 }
 .CreatePost {
    position: absolute;
-  top: -5px;   /* Adjusts the button above the search bar */
-  right: 0;     /* Aligns it to the right */
+  top: -5px;  
+  right: 0;     
   background-color: #010386;
   color: white;
   padding: 0.5rem 1rem;
   text-decoration: none;
+  border: none;
   border-radius: 15px;
   font-weight: bold;
   white-space: nowrap;
@@ -119,7 +119,6 @@
 .CreatePost:hover{
   background-color: #0006c1;
   text-decoration: none;
-
 }
 
 
@@ -133,4 +132,124 @@
 
 .socialcontent {
   margin-top: 8px;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 120ms ease-out;
+}
+.modal-overlay.open {
+  animation: fadeIn 150ms ease-out forwards;
+}
+
+.modal-overlay.close {
+  animation: fadeOut 150ms ease-in forwards;
+}
+.modal-panel {
+  width: min(640px, 92vw);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  padding: 0; 
+  transform: translateY(0);
+  animation: popIn 140ms ease-out;
+}
+.modal-panel.open {
+  animation: popIn 150ms ease-out forwards;
+}
+
+.modal-panel.close {
+  animation: popOut 150ms ease-in forwards;
+}
+
+.modal-panel.top {
+  margin-top: 6vh;           
+  align-self: flex-start;   
+}
+
+.create-post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem 1.25rem 1rem;
+}
+
+.create-post-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: -0.25rem -0.25rem 0.25rem;
+  padding: 0.25rem 0.25rem 0.75rem;
+  border-bottom: 1px solid #eee;
+}
+
+.icon-btn {
+  border: none;
+  background: transparent;
+  font-size: 1.1rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.create-post-input,
+.create-post-textarea {
+  width: 100%;
+  border: 1px solid #e4e4e7;
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+  font-size: 0.98rem;
+  outline: none;
+  transition: border-color 120ms ease;
+}
+
+.create-post-input:focus,
+.create-post-textarea:focus {
+  border-color: #6366f1; 
+}
+
+.create-post-btn {
+  align-self: flex-end;
+  border: none;
+  border-radius: 999px;
+  padding: 0.6rem 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: #1d9bf0;    
+  color: white;
+}
+
+.create-post-btn:hover {
+  filter: brightness(0.95);
+}
+
+.error-message {
+  color: #b91c1c;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to   { opacity: 1 }
+}
+@keyframes fadeOut {
+  from { opacity: 1 }
+  to   { opacity: 0 }
+}
+@keyframes popIn {
+  from { transform: translateY(6px); opacity: 0.96; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+@keyframes popOut {
+  from { transform: translateY(0) scale(1); opacity: 1; }
+  to   { transform: translateY(6px) scale(0.98); opacity: 0; }
 }
