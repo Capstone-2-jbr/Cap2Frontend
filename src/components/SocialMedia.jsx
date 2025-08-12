@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import "./css/SocialMedia.css";
+import Modal from "./Modal";
+import CreatePost from "./CreatePost";
 
 const mockPosts = [
   { id: 1, username: "alice", content: "Just finished a great book!" },
@@ -13,9 +14,12 @@ const mockPosts = [
 ];
 
 const SocialMedia = () => {
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState("");
 
-  const filteredPosts = mockPosts.filter(
+  const allPosts = [...posts, ...mockPosts];
+  const filteredPosts = allPosts.filter(
     (post) =>
       post.username.toLowerCase().includes(filter.toLowerCase()) ||
       post.content.toLowerCase().includes(filter.toLowerCase())
@@ -26,15 +30,20 @@ const SocialMedia = () => {
       <h2>Social Media Feed</h2>
       <div className="socialheader">
         <input
-        type="text"
-        className="searchbar"
-        placeholder="Search..."
-        value={filter}
-        onChange={(e) => setFilter(e.target.value)}
-      />
-      <Link to ="/SocialMedia/CreatePost" className="CreatePost">Create Post</Link>
+          type="text"
+          className="searchbar"
+          placeholder="Search..."
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        />
+        <button
+          className="CreatePost"
+          onClick={() => setIsCreateOpen(true)}
+        >
+          Create Post
+        </button>
       </div>
-      
+
       <div className="socialgrid">
         {filteredPosts.length === 0 ? (
           <div className="noposts">No posts found.</div>
@@ -47,6 +56,23 @@ const SocialMedia = () => {
           ))
         )}
       </div>
+
+      <Modal
+        isOpen={isCreateOpen}
+        onClose={() => setIsCreateOpen(false)}
+        position="center"
+      >
+        <CreatePost
+          isOpen={isCreateOpen}
+          onClose={() => setIsCreateOpen(false)}
+          onCreate={(newPost) => {
+            setPosts((prev) => [
+              { id: Date.now(), username: "you", ...newPost },
+              ...prev,
+            ]);
+          }}
+        />
+      </Modal>
     </div>
   );
 };
