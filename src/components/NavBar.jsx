@@ -1,9 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./css/NavBarStyles.css";
 import "./css/AuthStyles.css";
+import { ThemeContext } from "./ThemeContext";
 
 const NavBar = ({ user, onLogout }) => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const { pathname } = useLocation();
   const [activePath, setActivePath] = useState(pathname);
 
@@ -11,7 +13,6 @@ const NavBar = ({ user, onLogout }) => {
   const dropdownRef = useRef(null);
   const iconRef = useRef(null);
 
-  // Keep activePath in sync with actual route
   useEffect(() => {
     setActivePath(pathname);
   }, [pathname]);
@@ -31,7 +32,6 @@ const NavBar = ({ user, onLogout }) => {
     }
   };
 
-  // Close dropdown on outside click
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -39,7 +39,6 @@ const NavBar = ({ user, onLogout }) => {
     };
   }, []);
 
-  // ✅ Ensures instant highlight change
   const handleNavClick = (path) => {
     setActivePath(path);
   };
@@ -47,7 +46,11 @@ const NavBar = ({ user, onLogout }) => {
   return (
     <nav className="navbar">
       <div className="nav-left">
-        <Link to="/" className="nav-brand jewels-font" onClick={() => handleNavClick("/")}>
+        <Link
+          to="/"
+          className="nav-brand jewels-font"
+          onClick={() => handleNavClick("/")}
+        >
           Sociac
         </Link>
       </div>
@@ -55,14 +58,18 @@ const NavBar = ({ user, onLogout }) => {
       <div className="nav-center">
         <Link
           to="/musicplayer"
-          className={`nav-link${activePath === "/musicplayer" ? " active" : ""}`}
+          className={`nav-link${
+            activePath === "/musicplayer" ? " active" : ""
+          }`}
           onClick={() => handleNavClick("/musicplayer")}
         >
           Music Player
         </Link>
         <Link
           to="/socialmedia"
-          className={`nav-link${activePath === "/socialmedia" ? " active" : ""}`}
+          className={`nav-link${
+            activePath === "/socialmedia" ? " active" : ""
+          }`}
           onClick={() => handleNavClick("/socialmedia")}
         >
           Social Media
@@ -77,6 +84,12 @@ const NavBar = ({ user, onLogout }) => {
       </div>
 
       <div className="nav-right">
+        <button
+          onClick={toggleTheme}
+          style={{ padding: "0.5rem", cursor: "pointer" }}
+        >
+          {theme === "light" ? "🌙" : "☀️"}
+        </button>
         <img
           ref={iconRef}
           onClick={toggleDropdown}
@@ -95,19 +108,34 @@ const NavBar = ({ user, onLogout }) => {
             </div>
             {user ? (
               <>
-                <Link to="/profile" className="nav-dropdown-link" onClick={() => setIsOpen(false)}>
+                <Link
+                  to="/profile"
+                  className="nav-dropdown-link"
+                  onClick={() => setIsOpen(false)}
+                >
                   ✏️ View Profile
                 </Link>
-                <button onClick={onLogout} className="nav-dropdown-link logout-btn">
+                <button
+                  onClick={onLogout}
+                  className="nav-dropdown-link logout-btn"
+                >
                   🚪 Log Out
                 </button>
               </>
             ) : (
               <>
-                <Link to="/login" className="nav-dropdown-link" onClick={() => setIsOpen(false)}>
+                <Link
+                  to="/login"
+                  className="nav-dropdown-link"
+                  onClick={() => setIsOpen(false)}
+                >
                   🔐 Login
                 </Link>
-                <Link to="/signup" className="nav-dropdown-link" onClick={() => setIsOpen(false)}>
+                <Link
+                  to="/signup"
+                  className="nav-dropdown-link"
+                  onClick={() => setIsOpen(false)}
+                >
                   ✍️ Sign Up
                 </Link>
               </>
