@@ -12,6 +12,7 @@ import MusicPlayer from "./components/MusicPlayer";
 import SocialMedia from "./components/SocialMedia";
 import CreatePost from "./components/CreatePost";
 import Shop from "./components/Shop";
+import { ThemeProvider } from "./components/ThemeContext";
 import { API_URL } from "./shared";
 
 const App = () => {
@@ -50,6 +51,7 @@ const App = () => {
 
   return (
     <div>
+      <ThemeProvider>
       <NavBar user={user} onLogout={handleLogout} />
       <div className="app">
         <Routes>
@@ -66,6 +68,7 @@ const App = () => {
       <footer className="footer">
           <p>&copy; {new Date().getFullYear()} Sociac. All rights reserved.</p>
         </footer>
+        </ThemeProvider>
     </div>
   );
 };

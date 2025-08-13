@@ -1,15 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import "./css/Shop.css";
 
-
-const ItemPreview = ({ item }) => {
+const ItemPreview = ({ item, onViewDetails }) => {
   return (
     <div className="shop-item">
-      <img src={item.media || "https://via.placeholder.com/150"} alt={item.title} />
-      <h3>{item.title}</h3>
-      <h4>{item.artist}</h4>
-      <p>${(item.price_cents / 100).toFixed(2)}</p>
-      <Link to={`/shop/${item.listing_id}`}>View Details</Link>
+      <div className="cd-wrapper">
+        <img src={item.media} alt={item.title} />
+      </div>
+      <h3 className="shop-item-title">{item.title}</h3>
+      {item.artist && <p className="by-artist">by {item.artist}</p>}
+      <p className="shop-item-price">${(item.price_cents / 100).toFixed(2)}</p>
+      <button className="view-details" onClick={() => onViewDetails(item)}>View Details</button>
     </div>
   );
 };

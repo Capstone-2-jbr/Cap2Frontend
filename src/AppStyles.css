@@ -1,24 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Mozilla+Text:wght@200..700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Jewels", sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   letter-spacing: 2px;
 }
-@font-face {
-  font-family: "Jewels";
-  src: url("/fonts/Jewels.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
+
+/* Light Mode */
+:root {
+  --background-gradient: linear-gradient(#08a1f4, #00136a);
+  --title-color: #ffffff;
+  --border-color: #000;
+  --container-bg: hsl(208, 100%, 97%);
+  --text-color: #333;
+  --card-bg: aliceblue;
+  --card-border: #000;
+  --button-back: #00136a;
+  --button-text: white;
+  --button-bg:#00136a;
+  --button-hover-bg: #0040a3;
+  --link-color: white;
+  --footer-bg: #00136a;
+  --footer-text: #ffffff;
+  --footer-hover-bg: #025aac;
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-dark: rgba(0, 0, 0, 0.2);
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] {
+  --background-gradient: linear-gradient( #38429c,#1a1f2c);
+  --title-color: #ffcc00;
+  --border-color: #555;
+  --container-bg: #cccccc;
+  --text-color: #f5f5f5;
+  --card-bg: #2a2a2a;
+  --card-border: #555;
+  --button-bg: #444;
+  --button-text: #f5f5f5;
+  --button-hover-bg: #666;
+  --link-color: #fffefc;
+  --footer-bg: #111;
+  --footer-text: #ccc;
+  --footer-hover-bg: #333;
+  --shadow-light: rgba(255, 255, 255, 0.05);
+  --shadow-dark: rgba(255, 255, 255, 0.1);
+}
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: var(--container-bg);
+  border-bottom: var(--container-bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 body {
-  background-image: linear-gradient(#08a1f4, #00136a);
-  font-size:  20px;
+  background-image: var(--background-gradient);
+  font-size: 20px;
 }
 
 .title {
-  color: #ffffff;
+  color: var(--title-color);
   font-size: 3rem;
   font-weight: 700;
   text-align: center;
@@ -35,17 +83,16 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 300px;
-  border: 1px solid #010029;
-  border: 2px solid #000;
+  border: 2px solid var(--border-color);
   border-radius: 10px;
-  background-color: hsl(208, 100%, 97%);
+  background-color: var(--container-bg);
 }
 
 .description-card {
   width: 100%;
   max-width: 900px;
   padding: 2rem;
-  background-color: hsl(208, 100%, 97%);
+  background-color: var(--container-bg);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -53,8 +100,8 @@ body {
   text-align: center;
   transition: box-shadow 0.3s ease-in-out;
 }
-.description-card:hover{
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+.description-card:hover {
+  box-shadow: 0 2px 6px var(--shadow-light);
 }
 
 .description-card h2 {
@@ -66,7 +113,7 @@ body {
   text-align: center;
   font-size: 20px;
   line-height: 1.8;
-  color: #333;
+  color: var(--text-color);
   margin-top: 0.5rem;
 }
 
@@ -88,10 +135,10 @@ body {
   min-height: 200px;
   width: 300px;
   padding: 1.5rem;
-  background-color: aliceblue;
-  border: 2px solid #000;
+  background-color: var(--card-bg);
+  border: 2px solid var(--card-border);
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px var(--shadow-light);
   overflow: hidden;
   opacity: 0;
   transform: translateX(-50px);
@@ -101,9 +148,8 @@ body {
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  height: 100%;
 }
-.card h2{
+.card h2 {
   margin-bottom: 1rem;
 }
 
@@ -113,35 +159,35 @@ body {
 }
 
 .card:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px var(--shadow-dark);
 }
 
 .card img {
   width: 100%;
   border-radius: 4px;
 }
+
 .card-button {
   display: inline-block;
   margin-top: 2rem;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 6px;
-  background-color: #00136a;
-  color: white;
+  background-color: var(--button-bg);
+  color: var(--button-text);
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .card-button:hover {
-  background-color: #0040a3;
+  background-color: var(--button-hover-bg);
 }
 
 .card a {
-  color: white;
+  color: var(--link-color);
   text-decoration: none;
 }
-
 
 .app {
   display: flex;
@@ -159,18 +205,18 @@ body {
     transform: rotate(360deg);
   }
 }
+
 .footer {
   width: 100%;
   padding: 1rem 2rem;
-  color: #ffffff;
+  color: var(--footer-text);
   text-align: center;
   border: none;
-  background-color: #00136a;
+  background-color: var(--footer-bg);
   font-size: 0.9rem;
   margin-top: 4rem;
   transition: 0.3s;
 }
-.footer:hover{
-  background-color: #025aac;
+.footer:hover {
+  background-color: var(--footer-hover-bg);
 }
-
