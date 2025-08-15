@@ -3,8 +3,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #e9ecef;
+  background-color: var(--nav-bg);
+  border-bottom: 1px solid var(--nav-border);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -31,9 +31,12 @@
   align-items: center;
   justify-content: flex-end;
 }
-
+.nav-LD{
+  cursor: "pointer";
+  margin-right: 12px;
+}
 .nav-link {
-  color: #333;
+  color: var(--nav-link);
   text-decoration: none;
   padding: 0.5rem 1rem;
   font-size: 18px;
@@ -51,22 +54,22 @@
   right: 0;
   bottom: 0;
   height: 3px;
-  background: #007bff;
+  background: var(--nav-link);
   border-radius: 2px;
   transition: 0.2s;
 }
 
 .nav-link:hover {
-  color: #007bff;
+  color: var(--nav-link);
   border: none;
   border-radius: 7px;
-  background-color: #e9ecef;
+  /*background-color: var(--button-hover-bg);*/
 }
 
 .nav-brand {
   font-size: 24px;
   font-weight: bold;
-  color: #333;
+  color:var(--sociac-color);
   text-decoration: none;
   position: relative;
   z-index: 10;
@@ -74,7 +77,7 @@
 }
 
 .nav-brand:hover {
-  color: #007bff;
+  color: var(--title-color);
 }
 
 .profile-icon {
@@ -89,12 +92,12 @@
   position: absolute;
   top: 50px;
   right: 0;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 8px;
   padding: 1rem;
   z-index: 1000;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 20px var(--shadow-dark);
   min-width: 200px;
 }
 
@@ -103,15 +106,15 @@
   border: none;
   border-radius: 10px;
   padding: 0.75rem 10px;
-  color: #333;
+  color: var(--text-color);
   text-decoration: none;
   font-size: 0.95rem;
   transition: background-color 0.2s ease;
 }
 
 .nav-dropdown-link:hover {
-  color: white;
-  background-color: #00136a;
+  color: var(--text-color);
+  background-color: var(--button-hover-bg);
 }
 
 .user-info {
@@ -120,7 +123,7 @@
 
 .user-email {
   font-size: 0.875rem;
-  color: #666;
+  color: var(--muted-text);
 }
 
 .logout-btn {
@@ -132,6 +135,6 @@
 }
 
 .logout-btn:hover {
-  color: #fff;
-  background-color: #8b0a17;
+  color: var(--button-text);
+  background-color: var(--button-hover-bg);
 }

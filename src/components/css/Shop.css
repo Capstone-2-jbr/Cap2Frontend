@@ -1,7 +1,7 @@
 /* ===== Shop Container ===== */
 .shop {
   padding: 2rem;
-  background: #f8f9fc;
+  background: var(--page-bg);
   min-height: 100vh;
   border-radius: 15px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -12,7 +12,7 @@
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
-  color: #222;
+  color: var(--heading-color);
 }
 
 .shop h3 {
@@ -20,7 +20,7 @@
   font-size: 1.3rem;
   font-weight: 500;
   margin-bottom: 2.5rem;
-  color: #666;
+  color: var(--subheading-color);
 }
 
 /* ===== Grid Layout ===== */
@@ -37,9 +37,9 @@
 .shop-item {
   width: 100%;
   max-width: 280px;
-  background: #fff;
+  background: var(--card-bg);
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 20px var(--shadow-light);
   padding: 1.5rem 1rem;
   display: flex;
   flex-direction: column;
@@ -49,7 +49,7 @@
 
 .shop-item:hover {
   transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  box-shadow: 0 10px 25px var(--shadow-medium);
 }
 
 /* ===== CD-Style Album Art ===== */
@@ -59,7 +59,7 @@
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 1.2rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 10px var(--shadow-light);
   filter: grayscale(5%) contrast(1.05);
   opacity: 0.97;
   background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent 70%);
@@ -67,48 +67,35 @@
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.shop-item img::after {
-  content: "";
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  background: radial-gradient(circle, #ccc 40%, transparent 70%);
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 .shop-item img:hover {
   transform: scale(1.06) rotate(2deg);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 20px var(--shadow-medium);
 }
 
 /* ===== Album Title ===== */
 .shop-item-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #222;
+  color: var(--heading-color);
   text-align: center;
   margin-top: 20px;
 }
 
-/* ===== Price Tag ===== */
+
 .shop-item-price {
-  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  background: var(--price-gradient);
   color: #fff;
   font-size: 1rem;
   font-weight: 600;
   padding: 0.35rem 1rem;
   border-radius: 20px;
   margin-bottom: 1rem;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  box-shadow: var(--shadow-light);
 }
 
-/* ===== Action Button ===== */
 .shop-item-close {
-  background: linear-gradient(135deg,#ff0000, #b30000);
-  color: #fff;
+  background: var(--danger-gradient);
+  color: var(--button-text);
   border: none;
   border-radius: 8px;
   padding: 0.6rem 1.3rem;
@@ -117,33 +104,15 @@
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 .shop-item-close:hover {
-  background: linear-gradient(135deg, #b30000,#ff0000);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
-  transform: scale(1.05);
+  background: var(--danger-gradient-hover);
+  box-shadow: var(--shadow-medium);
 }
-.add-to-cart{
-  background: linear-gradient(135deg,  #007bff, #0056b3);
-  color: #fff;
-  margin-bottom: 10px;
-  border: none;
-  border-radius: 8px;
-  padding: 0.6rem 1.3rem;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.add-to-cart:hover {
-    background: linear-gradient(135deg, #0056b3, #007bff); 
-    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
-  transform: scale(1.05);
 
-}
-.view-details{
-  background: linear-gradient(135deg,  #007bff, #0056b3);
-  color: #fff;
+.add-to-cart
+.view-details {
+  background: var(--primary-gradient);
+  color: var(--button-text);
   border: none;
   border-radius: 8px;
   padding: 0.6rem 1.3rem;
@@ -153,30 +122,49 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 .view-details:hover {
-    background: linear-gradient(135deg, #0056b3, #007bff); 
-    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  background: var(--primary-gradient-hover);
+  box-shadow: var(--shadow-medium);
   transform: scale(1.05);
 }
-.shop-item-artist{
-    border: none;
+.add-to-cart{
+  background: var(--primary-gradient);
+  color: var(--button-text);
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 
-  font-size: 1.0rem;
+}
+
+.add-to-cart:hover{
+  background: var(--primary-gradient-hover);
+  box-shadow: var(--shadow-medium); 
+}
+
+/* ===== Artist Text ===== */
+.shop-item-artist {
+  border: none;
+  font-size: 1rem;
   font-weight: 700;
-  color: #8d8d8d;
+  color: var(--muted-text);
   text-align: center;
   margin: 15px;
 }
-.by-artist{
-    margin-bottom: 20px;
 
+.by-artist {
+  margin-bottom: 20px;
 }
 
+/* ===== Decade Heading ===== */
 .decade-heading {
   margin-top: 2rem;
   text-align: center;
   font-size: 1.5rem;
   font-weight: 700;
-  color: #222;
+  color: var(--heading-color);
   position: relative;
 }
 
@@ -185,7 +173,7 @@
   display: block;
   width: 60px;
   height: 3px;
-  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  background: var(--price-gradient);
   margin: 0.5rem auto 0;
   border-radius: 2px;
 }
@@ -200,7 +188,7 @@
   }
 }
 
-/* ===== Item Details Modal ===== */
+/* ===== Item Details ===== */
 .item-details {
   display: flex;
   flex-direction: column;
@@ -209,34 +197,11 @@
   max-width: 500px;
 }
 
-.item-details-img {
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 1rem;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
-  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent 70%);
-  position: relative;
-}
-
-.item-details-img::after {
-  content: "";
-  position: absolute;
-  width: 45px;
-  height: 45px;
-  background: radial-gradient(circle, #ccc 40%, transparent 70%);
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 .item-details-price {
-  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  background: var(--price-gradient);
   padding: 0.4rem 1rem;
   border-radius: 20px;
-  color: white;
+  color: var(--button-text);
   font-weight: bold;
   margin-bottom: 1rem;
 }
@@ -244,115 +209,22 @@
 .item-details-description {
   text-align: center;
   font-size: 0.95rem;
-  color: #444;
+  color: var(--text-color);
   margin-bottom: 1.5rem;
 }
-.cd-container {
-  position: relative;
-  width: 200px; /* Adjust as needed */
-  height: 200px;
-  border-radius: 50%;
-  overflow: hidden;
-  display: inline-block;
-  background: #fff; /* fallback if image missing */
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
 
-.cd-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.cd-container::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 40px; /* hole size */
-  height: 40px;
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-}
-.cd-wrapper {
-  position: relative;
-  width: 220px;
-  height: 220px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(circle at 30% 30%, #ddd, #aaa 70%, #666);
-  border-radius: 50%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-}
-
-/* The "printed" album art */
-.cd-wrapper img {
-  width: 65%; /* Smaller than disc size */
-  height: 65%;
-  border-radius: 4px;
-  object-fit: cover;
-  z-index: 2;
-}
-
-/* The metallic ring around the hole */
-.cd-wrapper::before {
-  content: "";
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  background: radial-gradient(circle, #bbb 0%, #777 70%);
-  border-radius: 50%;
-  z-index: 3;
-}
-
-/* The hole in the middle */
-.cd-wrapper::after {
-  content: "";
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  background: #000;
-  border-radius: 50%;
-  z-index: 4;
-}
-.item-details-grid {
-  display: flex;
-  gap: 2rem;
-  align-items: flex-start;
-  padding: 1rem;
-}
-
-/* LEFT SIDE */
-.item-left {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* RIGHT SIDE */
 .item-right {
   flex: 1;
-  background: #f7f7f7;
+  background: var(--secondary-bg);
   border-radius: 8px;
   padding: 1rem 1.5rem;
   overflow-y: auto;
   max-height: 400px;
 }
-
 .item-right h3 {
-  margin-bottom: 1rem;
+  color: var(--heading-color);
 }
-
-.item-right ol {
-  padding-left: 1.5rem;
-}
-
 .item-right li {
-  margin-bottom: 0.5rem;
+  margin-top: 12px;
+  color: var(--text-color);
 }
-
-
