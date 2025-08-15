@@ -48,7 +48,7 @@ const NavBar = ({ user, onLogout }) => {
       <div className="nav-left">
         <Link
           to="/"
-          className="nav-brand jewels-font"
+          className="nav-brand"
           onClick={() => handleNavClick("/")}
         >
           Sociac
@@ -86,7 +86,7 @@ const NavBar = ({ user, onLogout }) => {
       <div className="nav-right">
         <button
           onClick={toggleTheme}
-          style={{ padding: "0.5rem", cursor: "pointer" }}
+          className="nav-LD"
         >
           {theme === "light" ? "🌙" : "☀️"}
         </button>
