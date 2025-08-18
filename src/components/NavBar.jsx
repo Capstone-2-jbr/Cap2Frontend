@@ -46,11 +46,7 @@ const NavBar = ({ user, onLogout }) => {
   return (
     <nav className="navbar">
       <div className="nav-left">
-        <Link
-          to="/"
-          className="nav-brand"
-          onClick={() => handleNavClick("/")}
-        >
+        <Link to="/" className="nav-brand" onClick={() => handleNavClick("/")}>
           Sociac
         </Link>
       </div>
@@ -87,10 +83,7 @@ const NavBar = ({ user, onLogout }) => {
       </div>
 
       <div className="nav-right">
-        <button
-          onClick={toggleTheme}
-          className="nav-LD"
-        >
+        <button onClick={toggleTheme} className="nav-LD">
           {theme === "light" ? "🌙" : "☀️"}
         </button>
         <img
@@ -106,7 +99,12 @@ const NavBar = ({ user, onLogout }) => {
         {isOpen && (
           <div ref={dropdownRef} className="dropdown-menu">
             <div className="user-info">
-              <strong>{user?.username || "Guest"}</strong>
+              <strong>
+                {
+                  user?.username
+                  //|| "Guest"
+                }
+              </strong>
               <div className="user-email">{user?.email || "Not logged in"}</div>
             </div>
             {user ? (
