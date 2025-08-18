@@ -1,0 +1,58 @@
+.view-profile-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.view-profile-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.view-profile-username {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.view-profile-email {
+  font-size: 1rem;
+  color: #777;
+  margin-bottom: 16px;
+}
+
+.view-profile-bio {
+  font-size: 1rem;
+  color: #555;
+  white-space: pre-wrap;
+}
+
+.view-profile-loading,
+.view-profile-error,
+.view-profile-empty {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+}
+
+/* Edit Button Styling */
+.view-profile-edit-btn {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 20px;
+  background-color: #0d8ddb;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.2s ease-in-out;
+}
+
+.view-profile-edit-btn:hover {
+  background-color: #0b7cc0;
+}

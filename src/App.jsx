@@ -7,16 +7,21 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Home from "./components/Home";
+import PlaylistPage from "./components/PlaylistPage";
 import NotFound from "./components/NotFound";
 import MusicPlayer from "./components/MusicPlayer";
 import SocialMedia from "./components/SocialMedia";
 import CreatePost from "./components/CreatePost";
 import Shop from "./components/Shop";
 import { ThemeProvider } from "./components/ThemeContext";
+import Profile from "./components/Profile";
+import ViewProfile from "./components/ViewProfile";
 import { API_URL } from "./shared";
 
 const App = () => {
   const [user, setUser] = useState(null);
+  const [playlists, setPlaylists] = useState([]);
+  const [queue, setQueue] = useState([]);
 
   const checkAuth = async () => {
     try {
@@ -24,6 +29,7 @@ const App = () => {
         withCredentials: true,
       });
       setUser(response.data.user);
+      console.log("Authenticated user:", response.data.user);
     } catch {
       console.log("Not authenticated");
       setUser(null);
@@ -55,6 +61,19 @@ const App = () => {
         <NavBar user={user} onLogout={handleLogout} />
         <div className="app">
           <Routes>
+            <Route path="/profile" element={<Profile user={user} />} />
+            <Route path="/viewprofile/:userId" element={<ViewProfile />} />
+
+            <Route
+              path="/PlaylistPage"
+              element={
+                <PlaylistPage
+                  user={user}
+                  playlists={playlists}
+                  setPlaylists={setPlaylists}
+                />
+              }
+            />
             <Route path="/MusicPlayer" element={<MusicPlayer />} />
             <Route path="/socialmedia" element={<SocialMedia />} />
             <Route path="/socialmedia/createpost" element={<CreatePost />} />
