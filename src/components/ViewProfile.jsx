@@ -11,6 +11,7 @@ const ViewProfile = () => {
   const [error, setError] = useState(null);
 
   const fetchProfile = async () => {
+    console.log("Fetching profile for userId:", userId);
     try {
       setLoading(true);
       const response = await axios.get(
