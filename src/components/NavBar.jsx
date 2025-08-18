@@ -56,6 +56,9 @@ const NavBar = ({ user, onLogout }) => {
       </div>
 
       <div className="nav-center">
+        <Link to="/PlaylistPage" className="nav-link">
+          Playlists
+        </Link>
         <Link
           to="/musicplayer"
           className={`nav-link${
@@ -109,7 +112,7 @@ const NavBar = ({ user, onLogout }) => {
             {user ? (
               <>
                 <Link
-                  to="/profile"
+                  to="/viewprofile/:userId"
                   className="nav-dropdown-link"
                   onClick={() => setIsOpen(false)}
                 >

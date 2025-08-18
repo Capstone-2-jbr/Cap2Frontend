@@ -1,37 +1,55 @@
 import React from "react";
 import "./css/Queue.css";
+import { getYouTubeVideoId } from "../utils/getVideoIdFromUrl";
 
 const Queue = ({
   queue,
   currentTrackIndex,
-  onPlayTrack,
+  onPlay, 
   onRemoveTrack,
 }) => {
   return (
     <div className="queue-container">
       <h2>🎶 Queue</h2>
       <ul className="queue-list">
-        {queue.map((track, index) => (
-          <li
-            key={track.id || index}
-            className={index === currentTrackIndex ? "active" : ""}
-          >
-            <div
-              className="track-title"
-              onClick={() => onPlayTrack(track.id)}
-              title="Click to play"
+        {queue.map((track, index) => {
+          const videoId = getYouTubeVideoId(track.url || "");
+          const thumbnail = videoId
+            ? `https://img.youtube.com/vi/${videoId}/default.jpg`
+            : null;
+
+          return (
+            <li
+              key={track.id || index}
+              className={index === currentTrackIndex ? "active" : ""}
             >
-              {track.title}
-            </div>
+              {thumbnail && (
+                <img
+                  src={thumbnail}
+                  alt={track.title || `Track ${index + 1}`}
+                  className="queue-thumbnail"
+                  onClick={() => onPlay && onPlay(track)}
+                  title="Click to play"
+                />
+              )}
 
-            <div className="queue-actions">
+              <div
+                className="track-title"
+                onClick={() => onPlay && onPlay(track)}
+                title="Click to play"
+              >
+                {track.title || `Track ${index + 1}`}
+              </div>
 
-              <button onClick={() => onRemoveTrack(index)}>🗑</button>
-            </div>
-          </li>
-        ))}
+              <div className="queue-actions">
+                <button onClick={() => onRemoveTrack(index)}>🗑</button>
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
 };
+
 export default Queue;

@@ -3,6 +3,7 @@ import YouTube from "react-youtube";
 import MusicControls from "../components/MusicControls";
 import MusicDetails from "./MusicDetails";
 import Queue from "./Queue";
+//import {getYoutubeThumbnail} from "../utils/getYoutubeThumbnail";
 import { getYouTubeVideoId } from "../utils/getVideoIdFromUrl";
 import "./css/MusicPlayer.css";
 
@@ -28,6 +29,7 @@ const MusicPlayer = () => {
   const [isShuffle, setIsShuffle] = useState(false);
   const [queue, setQueue] = useState([]);
   const [darkMode, setDarkMode] = useState(true);
+  const [playlists, setPlaylists] = useState([]);
 
   const playerRef = useRef(null);
   const animationFrameRef = useRef(null);
@@ -36,10 +38,64 @@ const MusicPlayer = () => {
     e.preventDefault();
     const id = getYouTubeVideoId(url);
     if (id) {
-      playVideo(id);
+      const existingTrack = queue.find((track) => track.id === id);
+      if (existingTrack) {
+        const index = queue.findIndex((track) => track.id === id);
+        setCurrentTrackIndex(index);
+        setVideoId(id);
+      } else {
+        setVideoId(id);
+      }
       setUrl("");
     } else {
       alert("Invalid YouTube URL");
+    }
+  };
+
+  // New function to add song to queue without playing
+  const handleAddToQueue = (e) => {
+    e.preventDefault();
+    const id = getYouTubeVideoId(url);
+    if (id) {
+      const exists = queue.some((track) => track.id === id);
+      if (!exists) {
+        const newTrack = { id, title: `Track ${queue.length + 1}` };
+        setQueue((prev) => [...prev, newTrack]);
+      } else {
+        alert("Track already in queue");
+      }
+      setUrl("");
+    } else {
+      alert("Invalid YouTube URL");
+    }
+  };
+
+  const onReady = async (event) => {
+    const player = event.target;
+    playerRef.current = player;
+    setDuration(player.getDuration());
+
+    // Fetch title from YouTube player
+    const videoData = player.getVideoData();
+    const title = videoData?.title || `Track ${queue.length + 1}`;
+    const id = player.getVideoUrl().split("v=")[1]?.split("&")[0];
+
+    const exists = queue.some((track) => track.id === id);
+    if (!exists) {
+      const newTrack = { id, title };
+      setQueue((prev) => [...prev, newTrack]);
+      setCurrentTrackIndex(queue.length);
+    } else {
+      const index = queue.findIndex((track) => track.id === id);
+      setCurrentTrackIndex(index);
+    }
+
+    if (animationFrameRef.current) {
+      cancelAnimationFrame(animationFrameRef.current);
+    }
+
+    if (player.getPlayerState() === 1) {
+      animationFrameRef.current = requestAnimationFrame(updateTime);
     }
   };
 
@@ -59,32 +115,41 @@ const MusicPlayer = () => {
     }
   };
 
-  const playVideo = (id) => {
-    setVideoId(id);
-  
-    if (!queue.find((track) => track.id === id)) {
-      const title = `Track ${queue.length + 1}`; // Optional for the YT API.
-      const newTrack = { id, title };
-      setQueue((prev) => [...prev, newTrack]);
-      setCurrentTrackIndex(queue.length);
+  const updateTime = () => {
+    if (!playerRef.current) return;
+    if (playerRef.current.getPlayerState() === 1) {
+      setCurrentTime(playerRef.current.getCurrentTime());
+      animationFrameRef.current = requestAnimationFrame(updateTime);
     } else {
-      const index = queue.findIndex((track) => track.id === id);
-      setCurrentTrackIndex(index);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = null;
+      }
     }
   };
 
-  const handleQueueItemClick = (id) => {
-    const index = queue.indexOf(id);
-    if (index !== -1) {
-      setVideoId(id);
-      setCurrentTrackIndex(index);
+  const onEnd = () => {
+    if (isRepeat && playerRef.current) {
+      playerRef.current.seekTo(0);
+      playerRef.current.playVideo();
+    } else if (isShuffle) {
+      const randomIndex = Math.floor(Math.random() * queue.length);
+      const nextTrack = queue[randomIndex];
+      setVideoId(nextTrack.id);
+      setCurrentTrackIndex(randomIndex);
+    } else {
+      const nextIndex = currentTrackIndex + 1;
+      if (nextIndex < queue.length) {
+        setVideoId(queue[nextIndex].id);
+        setCurrentTrackIndex(nextIndex);
+      }
     }
   };
 
   const handleTrackSelect = (index) => {
-    const selectedId = queue[index];
-    if (selectedId) {
-      setVideoId(selectedId);
+    const track = queue[index];
+    if (track) {
+      setVideoId(track.id);
       setCurrentTrackIndex(index);
     }
   };
@@ -99,7 +164,7 @@ const MusicPlayer = () => {
           setVideoId(null);
         } else {
           const nextIndex = Math.min(index, newQueue.length - 1);
-          setVideoId(newQueue[nextIndex]);
+          setVideoId(newQueue[nextIndex].id);
           setCurrentTrackIndex(nextIndex);
         }
       } else if (index < currentTrackIndex) {
@@ -108,61 +173,6 @@ const MusicPlayer = () => {
 
       return newQueue;
     });
-  };
-
-  const opts = {
-    height: "0",
-    width: "0",
-    playerVars: {
-      autoplay: 1,
-      modestbranding: 1,
-      controls: 0,
-    },
-  };
-
-  const updateTime = () => {
-    if (!playerRef.current) return;
-    if (playerRef.current.getPlayerState() === 1) {
-      setCurrentTime(playerRef.current.getCurrentTime());
-      animationFrameRef.current = requestAnimationFrame(updateTime);
-    } else {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-        animationFrameRef.current = null;
-      }
-    }
-  };
-
-  const onReady = (event) => {
-    const player = event.target;
-    playerRef.current = player;
-    setDuration(player.getDuration());
-
-    if (animationFrameRef.current) {
-      cancelAnimationFrame(animationFrameRef.current);
-    }
-
-    if (player.getPlayerState() === 1) {
-      animationFrameRef.current = requestAnimationFrame(updateTime);
-    }
-  };
-
-  const onEnd = () => {
-    if (isRepeat && playerRef.current) {
-      playerRef.current.seekTo(0);
-      playerRef.current.playVideo();
-    } else if (isShuffle) {
-      const randomIndex = Math.floor(Math.random() * queue.length);
-      const nextVideoId = queue[randomIndex];
-      setVideoId(nextVideoId);
-      setCurrentTrackIndex(randomIndex);
-    } else {
-      const nextIndex = currentTrackIndex + 1;
-      if (nextIndex < queue.length) {
-        setVideoId(queue[nextIndex]);
-        setCurrentTrackIndex(nextIndex);
-      }
-    }
   };
 
   const handleProgressClick = (e) => {
@@ -195,10 +205,18 @@ const MusicPlayer = () => {
   const toggleShuffle = () => setIsShuffle((prev) => !prev);
   const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
+  const opts = {
+    height: "0",
+    width: "0",
+    playerVars: {
+      autoplay: 1,
+      modestbranding: 1,
+      controls: 0,
+    },
+  };
+
   return (
-    <div
-      className={`music-player-page ${darkMode ? "dark-mode" : "light-mode"}`}
-    >
+    <div className={`music-player-page ${darkMode ? "dark-mode" : "light-mode"}`}>
       <h2>🎵 Music Player</h2>
 
       <div style={{ textAlign: "center", marginBottom: "1rem" }}>
@@ -218,14 +236,19 @@ const MusicPlayer = () => {
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="link-form">
+      <form className="link-form">
         <input
           type="text"
           placeholder="Paste YouTube link here..."
           value={url}
           onChange={(e) => setUrl(e.target.value)}
         />
-        <button type="submit">Play</button>
+        <button type="submit" onClick={handleSubmit}>
+          Play
+        </button>
+        <button type="button" onClick={handleAddToQueue}>
+          Add to Queue
+        </button>
         <button
           type="button"
           onClick={() => {
@@ -269,34 +292,12 @@ const MusicPlayer = () => {
               setIsPlaying={setIsPlaying}
             />
 
-            <Queue 
+            <Queue
               queue={queue}
+              onPlay
               currentTrackIndex={currentTrackIndex}
               onPlayTrack={handleTrackSelect}
               onRemoveTrack={handleRemoveTrack}
-              onMoveTrackUp={(index) => {
-                if (index > 0) {
-                  const newQueue = [...queue];
-                  [newQueue[index - 1], newQueue[index]] = [
-                    newQueue[index],
-                    newQueue[index - 1],
-                  ];
-                  setQueue(newQueue);
-                  setCurrentTrackIndex(index - 1);
-                }
-              }}
-              onMoveTrackDown={(index) => {
-                if (index < queue.length - 1) {
-                  const newQueue = [...queue];
-                  [newQueue[index + 1], newQueue[index]] = [
-                    newQueue[index],
-                    newQueue[index + 1],
-                  ];
-                  setQueue(newQueue);
-                  setCurrentTrackIndex(index + 1);
-                }
-              }}
-              
             />
 
             <div className="progress-bar-container">
@@ -304,9 +305,7 @@ const MusicPlayer = () => {
                 <div
                   className="progress"
                   style={{
-                    width: duration
-                      ? `${(currentTime / duration) * 100}%`
-                      : "0%",
+                    width: duration ? `${(currentTime / duration) * 100}%` : "0%",
                   }}
                 ></div>
               </div>
