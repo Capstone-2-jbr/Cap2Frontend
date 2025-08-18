@@ -98,15 +98,18 @@ const NavBar = ({ user, onLogout }) => {
           onClick={toggleDropdown}
           className="profile-icon"
           src={
-            user?.profileImageUrl ||
-            "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+            user?.profileImageUrl 
+            // ||
+            // "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
           }
           alt="Profile"
         />
         {isOpen && (
           <div ref={dropdownRef} className="dropdown-menu">
             <div className="user-info">
-              <strong>{user?.username || "Guest"}</strong>
+              <strong>{user?.username 
+              // || "Guest"
+              }</strong>
               <div className="user-email">{user?.email || "Not logged in"}</div>
             </div>
             {user ? (
