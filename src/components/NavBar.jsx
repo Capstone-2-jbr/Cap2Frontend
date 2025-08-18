@@ -3,8 +3,11 @@ import { Link, useLocation } from "react-router-dom";
 import "./css/NavBarStyles.css";
 import "./css/AuthStyles.css";
 import { ThemeContext } from "./ThemeContext";
+import { useCart } from "./CartContext";
 
 const NavBar = ({ user, onLogout }) => {
+  const { items } = useCart();
+  const itemCount = items.reduce((sum, it) => sum + it.quantity, 0);
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { pathname } = useLocation();
   const [activePath, setActivePath] = useState(pathname);
@@ -86,6 +89,10 @@ const NavBar = ({ user, onLogout }) => {
         <button onClick={toggleTheme} className="nav-LD">
           {theme === "light" ? "🌙" : "☀️"}
         </button>
+        <Link to="/shop/cart" className="cart-link" aria-label="Cart">
+          🛒
+          {itemCount > 0 && <span className="cart-badge">{itemCount}</span>}
+        </Link>
         <img
           ref={iconRef}
           onClick={toggleDropdown}

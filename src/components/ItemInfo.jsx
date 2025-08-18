@@ -1,14 +1,20 @@
 import React from "react";
 import Modal from "./Modal";
 import "./css/Shop.css";
+import { useCart } from "./CartContext";
 
 const ItemInfo = ({ item, isOpen, onClose }) => {
+  const { addItem } = useCart();
   if (!item) return null;
+  const handleAdd = async () => {
+    await addItem(item.listing_id, 1); // backend call handled in context
+    alert("Added to cart!");
+    onClose?.();
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} position="center">
       <div className="item-details-grid">
-        
         {/* LEFT COLUMN */}
         <div className="item-left">
           <div className="cd-wrapper">
@@ -22,7 +28,10 @@ const ItemInfo = ({ item, isOpen, onClose }) => {
           <p className="item-details-description">
             {item.description || "No description provided."}
           </p>
-          <button className="add-to-cart">Add to Cart</button>
+
+          <button className="add-to-cart" onClick={handleAdd}>
+            Add to Cart
+          </button>
           <button className="shop-item-close" onClick={onClose}>
             Close
           </button>
@@ -41,10 +50,8 @@ const ItemInfo = ({ item, isOpen, onClose }) => {
             </>
           )}
         </div>
-
       </div>
     </Modal>
   );
 };
-
 export default ItemInfo;

@@ -34,20 +34,21 @@ const Home = () => {
       title: "Music Player 🎵",
       desc:
         "Listen to your favorite songs via a link. You can also save your songs to a playlist.",
-      link: "/MusicPlayer",
+      link: "/musicplayer",
       button: "Listen to your heart's content",
     },
     {
       title: "Social Media 💬",
       desc:
         "Share photos, videos, and music taste with other users of Sociac!",
-      link: "/SocialMedia",
+      link: "/socialmedia",
       button: "Socialize with friends",
     },
     {
       title: "Shop 🛒",
       desc:
         "Shop for vintage CDs, mixtapes, and even sell your own music onto the platform!",
+        link: "/shop",
       button: "View offers",
     },
   ];
