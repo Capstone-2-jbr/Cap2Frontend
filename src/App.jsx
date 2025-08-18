@@ -12,8 +12,12 @@ import MusicPlayer from "./components/MusicPlayer";
 import SocialMedia from "./components/SocialMedia";
 import CreatePost from "./components/CreatePost";
 import Shop from "./components/Shop";
+import CartPage from "./components/CartPage";
+import { CartProvider } from "./components/CartContext";
 import { ThemeProvider } from "./components/ThemeContext";
 import { API_URL } from "./shared";
+axios.defaults.withCredentials = true;
+
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -52,6 +56,7 @@ const App = () => {
   return (
     <div>
       <ThemeProvider>
+        <CartProvider user ={user}>
         <NavBar user={user} onLogout={handleLogout} />
         <div className="app">
           <Routes>
@@ -59,6 +64,7 @@ const App = () => {
             <Route path="/socialmedia" element={<SocialMedia />} />
             <Route path="/socialmedia/createpost" element={<CreatePost />} />
             <Route path="/shop" element={<Shop />} />
+            <Route path="/shop/cart" element={<CartPage/>} />
             <Route path="/login" element={<Login setUser={setUser} />} />
             <Route path="/signup" element={<Signup setUser={setUser} />} />
             <Route exact path="/" element={<Home />} />
@@ -68,6 +74,7 @@ const App = () => {
         <footer className="footer">
           <p>&copy; {new Date().getFullYear()} Sociac. All rights reserved.</p>
         </footer>
+        </CartProvider>
       </ThemeProvider>
     </div>
   );
