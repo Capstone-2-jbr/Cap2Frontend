@@ -1,4 +1,4 @@
-/* Shop Container */
+
 .shop {
   padding: 2rem;
   background: var(--page-bg);
@@ -14,12 +14,12 @@
   margin-bottom: 0.5rem;
   color: var(--heading-color);
 }
-/* Shop Controls (Search + Filter) */
+
 .shop-controls {
   display: flex;
-  justify-content: center;   /* Center horizontally */
-  align-items: center;       /* Center vertically */
-  gap: 1rem;                 /* Space between search + filter */
+  justify-content: center;   
+  align-items: center;     
+  gap: 1rem;               
   margin: 1rem auto 2rem;
   padding: 1rem;
   border: 2px solid var(--card-border);
@@ -30,7 +30,6 @@
   box-shadow: 0 2px 6px var(--shadow-light);
 }
 
-/* Inputs + Select inside controls */
 .shop-controls input,
 .shop-controls select {
   padding: 0.6rem 1rem;
@@ -42,7 +41,6 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Focus state */
 .shop-controls input:focus,
 .shop-controls select:focus {
   outline: none;
@@ -263,6 +261,7 @@
   font-weight: bold;
   margin-bottom: 1rem;
 }
+
 
 .item-details-description {
   text-align: center;
