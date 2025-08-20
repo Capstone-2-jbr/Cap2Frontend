@@ -127,6 +127,10 @@
   padding: 2rem;
   text-align: center;
 }
+.cart-empty a{
+    color: var(--nav-link);
+    text-decoration: none;
+}
 
 .cart-summary {
   background: var(--card-bg);

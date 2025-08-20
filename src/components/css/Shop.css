@@ -109,7 +109,7 @@
 .shop-item-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--item-name);
+  color: var(--heading-color);
   text-align: center;
   margin-top: 20px;
 }

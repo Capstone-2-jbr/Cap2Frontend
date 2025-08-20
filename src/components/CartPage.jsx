@@ -69,7 +69,8 @@ export default function CartPage() {
 
           {items.length === 0 && (
             <div className="cart-empty">
-              Your cart is empty. <Link to="/shop">Continue shopping →</Link>
+              <a>Your cart is empty.</a><br/>
+              <button><Link to="/shop">Continue shopping →</Link></button>
             </div>
           )}
 
