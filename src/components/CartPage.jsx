@@ -8,7 +8,7 @@ const fmt = (cents) => (cents / 100).toFixed(2);
 function QtyStepper({ value, onChange }) {
   return (
     <div className="qty-stepper">
-      <button onClick={() => onChange(Math.max(1, value - 1))}>-</button>
+      <button onClick={() => onChange(Math.min(99, value + 1))}>+</button>
       <input
         type="number"
         min={1}
@@ -16,7 +16,7 @@ function QtyStepper({ value, onChange }) {
         value={value}
         onChange={(e) => onChange(parseInt(e.target.value || "1", 10))}
       />
-      <button onClick={() => onChange(Math.min(99, value + 1))}>+</button>
+      <button onClick={() => onChange(Math.max(1, value - 1))}>-</button>
     </div>
   );
 }
@@ -52,11 +52,7 @@ export default function CartPage() {
 
   return (
     <div className="cart-page">
-      {toast && (
-        <div className={`cart-toast ${toast.type}`}>
-          {toast.msg}
-        </div>
-      )}
+      {toast && <div className={`cart-toast ${toast.type}`}>{toast.msg}</div>}
 
       <h1>
         Your Cart ({items.length} {items.length === 1 ? "item" : "items"})
@@ -137,19 +133,19 @@ export default function CartPage() {
           </div>
 
           <button
-            className="clear-btn"
-            onClick={handleClear}
-            disabled={items.length === 0}
-          >
-            Clear Cart
-          </button>
-
-          <button
             className="checkout-btn"
             onClick={handleCheckout}
             disabled={items.length === 0}
           >
             Check out
+          </button>
+
+          <button
+            className="clear-btn"
+            onClick={handleClear}
+            disabled={items.length === 0}
+          >
+            Clear Cart
           </button>
         </aside>
       </div>

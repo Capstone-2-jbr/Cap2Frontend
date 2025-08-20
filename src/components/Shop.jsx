@@ -108,7 +108,7 @@ const Shop = () => {
         </>
       )}
 
-      {/* 🔹 2010s Section */}
+
       {(decadeFilter === "" || decadeFilter === "2010s") && (
         <>
           <h3 className="decade-heading">2010s Albums</h3>
@@ -128,7 +128,6 @@ const Shop = () => {
         </>
       )}
 
-      {/* 🔹 Item Details Modal */}
       <ItemInfo
         item={selectedItem}
         isOpen={isDetailsOpen}

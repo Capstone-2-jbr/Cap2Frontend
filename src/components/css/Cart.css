@@ -80,23 +80,38 @@
   align-items: center;
 }
 
+.qty-stepper input::-webkit-outer-spin-button,
+.qty-stepper input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 
 
 .qty-stepper {
   display: inline-flex;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 8px;
+  align-items: center;
+
+  border-radius: 6px;
   overflow: hidden;
-  background: var(--card-bg);
+  background: var(--card-bg, #fff);
 }
+
 .qty-stepper button {
   padding: 0.4rem 0.6rem;
   border: none;
-  background: transparent;
+  background: var(--primary-gradient);
   cursor: pointer;
   font-size: 1rem;
+  font-weight: 600;
   line-height: 1;
+  transition: background 0.2s;
 }
+
+.qty-stepper button:hover {
+  background: var(--primary-gradient-hover);
+}
+
 .qty-stepper input {
   width: 44px;
   text-align: center;
@@ -104,7 +119,9 @@
   outline: none;
   background: transparent;
   font-weight: 600;
+  font-size: 0.95rem;
 }
+
 
 .cart-empty {
   padding: 2rem;
@@ -136,7 +153,7 @@
 }
 .cart-toast {
   position: fixed;
-  top: 16px;
+  top: 80px;
   right: 16px;
   z-index: 3000;
   padding: 10px 14px;
@@ -146,7 +163,7 @@
   color: #fff;
   animation: cartToastIn 160ms ease-out;
 }
-.cart-toast.info { background: #2563eb; }
+.cart-toast.info { background: #16a34a; }
 .cart-toast.success { background: #16a34a; }
 .cart-toast.warn { background: #d97706; }
 @keyframes cartToastIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }

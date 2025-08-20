@@ -3,7 +3,6 @@ import React, {
   useContext,
   useEffect,
   useMemo,
-  useReducer,
 } from "react";
 import axios from "axios";
 import { API_URL } from "../shared";
