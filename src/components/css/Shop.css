@@ -1,4 +1,4 @@
-/* ===== Shop Container ===== */
+/* Shop Container */
 .shop {
   padding: 2rem;
   background: var(--page-bg);
@@ -14,16 +14,51 @@
   margin-bottom: 0.5rem;
   color: var(--heading-color);
 }
+/* Shop Controls (Search + Filter) */
+.shop-controls {
+  display: flex;
+  justify-content: center;   /* Center horizontally */
+  align-items: center;       /* Center vertically */
+  gap: 1rem;                 /* Space between search + filter */
+  margin: 1rem auto 2rem;
+  padding: 1rem;
+  border: 2px solid var(--card-border);
+  border-radius: 10px;
+  background-color: var(--container-bg);
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 0 2px 6px var(--shadow-light);
+}
+
+/* Inputs + Select inside controls */
+.shop-controls input,
+.shop-controls select {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: none var(--card-border);
+  border-radius: 8px;
+  background: var(--card-bg);
+  color: var(--text-color);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Focus state */
+.shop-controls input:focus,
+.shop-controls select:focus {
+  outline: none;
+  border-color: var(--button-border);
+  box-shadow: 0 0 5px var(--shadow-dark);
+}
 
 .shop h3 {
   text-align: center;
   font-size: 1.3rem;
   font-weight: 500;
   margin-bottom: 2.5rem;
-  color: var(--subheading-color);
 }
 
-/* ===== Grid Layout ===== */
+
+/* Grid Layout */
 .shop-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -33,7 +68,7 @@
   margin: 0 auto;
 }
 
-/* ===== Shop Item Card ===== */
+/* Shop Item Card */
 .shop-item {
   width: 100%;
   max-width: 280px;
@@ -52,7 +87,7 @@
   box-shadow: 0 10px 25px var(--shadow-medium);
 }
 
-/* ===== CD-Style Album Art ===== */
+/* CD-Style Album Art */
 .shop-item img {
   width: 200px;
   height: 200px;
@@ -72,16 +107,16 @@
   box-shadow: 0 8px 20px var(--shadow-medium);
 }
 
-/* ===== Album Title ===== */
+/* Album Title */
 .shop-item-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--heading-color);
+  color: var(--item-name);
   text-align: center;
   margin-top: 20px;
 }
 
-
+/* Price Tag */
 .shop-item-price {
   background: var(--price-gradient);
   color: #fff;
@@ -93,12 +128,12 @@
   box-shadow: var(--shadow-light);
 }
 
+/*Action Buttons*/
 .shop-item-close {
   background: var(--danger-gradient);
   color: var(--button-text);
   border: none;
   border-radius: 8px;
-  padding: 0.6rem 1.3rem;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -109,11 +144,10 @@
   box-shadow: var(--shadow-medium);
 }
 
-.add-to-cart
 .view-details {
-  background: var(--primary-gradient);
   color: var(--button-text);
   border: none;
+  margin-top: 10px;
   border-radius: 8px;
   padding: 0.6rem 1.3rem;
   font-size: 1rem;
@@ -131,20 +165,44 @@
   color: var(--button-text);
   border: none;
   border-radius: 8px;
-  padding: 0.6rem 1.3rem;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
 }
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;          
+  margin-top: 1rem;
+}
 
-.add-to-cart:hover{
+.modal-actions button {
+  flex: initial;  
+  width: auto;   
+}
+.addCart{
+  background: var(--primary-gradient);
+  color: var(--button-text);
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.addCart:hover{
   background: var(--primary-gradient-hover);
   box-shadow: var(--shadow-medium); 
 }
+.add-to-cart:hover{
+  background: var(--primary-gradient-hover);
+  box-shadow: var(--shadow-medium); 
+  transform: scale(1.05);
+}
 
-/* ===== Artist Text ===== */
+/* Artist Text */
 .shop-item-artist {
   border: none;
   font-size: 1rem;
@@ -178,7 +236,7 @@
   border-radius: 2px;
 }
 
-/* ===== Responsive ===== */
+/* Responsive */
 @media (max-width: 600px) {
   .shop {
     padding: 1rem;
@@ -188,7 +246,7 @@
   }
 }
 
-/* ===== Item Details ===== */
+/* Item Details */
 .item-details {
   display: flex;
   flex-direction: column;
@@ -226,5 +284,5 @@
 }
 .item-right li {
   margin-top: 12px;
-  color: var(--text-color);
+  color: var(--nav-link);
 }

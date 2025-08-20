@@ -32,7 +32,9 @@ export function CartProvider({ children, user }) {
 
   const fetchCart = async () => {
     try {
-      const res = await axios.get(`${API_URL}/api/cart`, {
+      const res = await axios.get(`${API_URL}/api/cart`,
+         {
+          headers: { "Cache-Control": "no-cache", Pragma: "no-cache" },
         withCredentials: true,
       });
       dispatch({ type: "LOAD", payload: res.data || { items: [] } });
