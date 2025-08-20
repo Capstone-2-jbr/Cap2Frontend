@@ -1,0 +1,52 @@
+.music-details {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 250px;
+  background-color: var(--card-bg, #ffffff);
+  color: var(--text-color, #fff);
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-left: 12px; /* spacing from thumbnail */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 0.9rem;
+  z-index: 1;
+}
+
+/* Triangle pointer to the thumbnail */
+.music-details::before {
+  content: "";
+  position: absolute;
+  left: -10px; /* position it outside the bubble */
+  top: 15px; /* vertically aligned with bubble content */
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent var(--card-bg, #ffffff) transparent transparent; /* right-pointing triangle */
+}
+
+/* Info inside bubble */
+.music-details .info h2 {
+  font-size: 1rem;
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--heading-color, #0f172a);
+}
+
+.music-details .info p {
+  margin: 2px 0;
+  font-size: 0.8rem;
+  color: var(--subheading-color, #888);
+}
+
+.music-details .info p:first-of-type {
+  color: var(--muted-text, #aaa);
+}
+
+.music-details .info p:last-of-type {
+  font-size: 0.75rem;
+  color: var(--muted-text, #888);
+}

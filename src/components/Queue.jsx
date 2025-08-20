@@ -15,8 +15,8 @@ const Queue = ({
         {queue.map((track, index) => {
           const videoId = getYouTubeVideoId(track.url || "");
           const thumbnail = videoId
-            ? `https://img.youtube.com/vi/${videoId}/default.jpg`
-            : null;
+            ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+            : null; // 🔥 upgraded from "default.jpg" → "hqdefault.jpg" for clearer thumbnail
 
           return (
             <li
@@ -28,14 +28,14 @@ const Queue = ({
                   src={thumbnail}
                   alt={track.title || `Track ${index + 1}`}
                   className="queue-thumbnail"
-                  onClick={() => onPlay && onPlay(track)}
+                  onClick={() => onPlay && onPlay(index)}  
                   title="Click to play"
                 />
               )}
 
               <div
                 className="track-title"
-                onClick={() => onPlay && onPlay(track)}
+                onClick={() => onPlay && onPlay(index)}  
                 title="Click to play"
               >
                 {track.title || `Track ${index + 1}`}

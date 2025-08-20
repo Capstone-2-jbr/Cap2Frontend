@@ -5,7 +5,7 @@ import { API_URL } from "../shared";
 import "./css/ViewProfile.css";
 
 const ViewProfile = () => {
-  const { userId } = useParams(); // assuming userId is passed in the URL
+  const { userId } = useParams();
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -38,12 +38,26 @@ const ViewProfile = () => {
   return (
     <div className="view-profile-container">
       <div className="view-profile-card">
+        {/* Profile Avatar */}
+        <div className="view-profile-avatar">
+          <span>{profile.username?.[0]?.toUpperCase() || "U"}</span>
+        </div>
+
+        {/* User Info */}
         <h1 className="view-profile-username">{profile.username}</h1>
         <p className="view-profile-email">{profile.email}</p>
-        {profile.bio && <p className="view-profile-bio">{profile.bio}</p>}
+
+        {profile.bio ? (
+          <p className="view-profile-bio">{profile.bio}</p>
+        ) : (
+          <p className="view-profile-bio muted">No bio added yet.</p>
+        )}
+
+        {/* Divider */}
+        <hr className="view-profile-divider" />
 
         {/* Edit Profile Button */}
-       <Link to ="/profile" className="view-profile-edit-button">
+        <Link to="/profile" className="view-profile-edit-btn">
           Edit Profile
         </Link>
       </div>

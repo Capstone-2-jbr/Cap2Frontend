@@ -117,7 +117,7 @@ const NavBar = ({ user, onLogout }) => {
             {user ? (
               <>
                 <Link
-                  to="/viewprofile/:userId"
+                  to='/viewprofile/${user?._id}'
                   className="nav-dropdown-link"
                   onClick={() => setIsOpen(false)}
                 >
