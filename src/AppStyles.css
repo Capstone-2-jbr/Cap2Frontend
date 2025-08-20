@@ -41,13 +41,14 @@
   --danger-bg-hover: #a31221;
   --page-bg: #f8f9fc;
   --secondary-bg: #f7f7f7;
+  --item-name: #0f172a;
   --card-bg: #fff;
-  --heading-color: #222;
+  --heading-color: #0f172a;
   --subheading-color: #666;
   --text-color: #444;
   --muted-text: #8d8d8d;
 
-  --primary-gradient: linear-gradient(135deg, #007bff, #0056b3);
+  --primary-gradient: linear-gradient(135deg, #3c98fb, #036dde);
   --primary-gradient-hover: linear-gradient(135deg, #0056b3, #007bff);
 
   --danger-gradient: linear-gradient(135deg, #ff0000, #b30000);
@@ -55,7 +56,7 @@
 
   --price-gradient: linear-gradient(135deg, #ff7e5f, #feb47b);
   --shadow-light: 0 4px 10px rgba(0, 0, 0, 0.06);
-  --shadow-medium: 0 8px 20px rgba(0, 0, 0, 0.15);
+  --shadow-medium: -3 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Dark Mode */
@@ -79,7 +80,7 @@
 
   --footer-bg: #010346bf;
   --footer-text: #ccc;
-  --footer-hover-bg: #333;
+  --footer-hover-bg: #030772bf;
   --description-text:aliceblue;
   --link-color: aliceblue;
 
@@ -91,12 +92,13 @@
   --secondary-bg: #2a2a2a;
   --card-bg: #2b2b2b;
   --heading-color: #f2f2f2;
+  --item-name: #0f172a;
   --subheading-color: #c0c0c0;
   --text-color: #ddd;
   --muted-text: #999;
 
-  --primary-gradient: linear-gradient(135deg, #3399ff, #0056b3);
-  --primary-gradient-hover: linear-gradient(135deg, #0056b3, #3399ff);
+  --primary-gradient: linear-gradient(135deg, #38429c, #1a1f2c);
+  --primary-gradient-hover: linear-gradient(135deg, #1a1f2c, #38429c);
 
   --danger-gradient: linear-gradient(135deg, #ff4d4d, #b30000);
   --danger-gradient-hover: linear-gradient(135deg, #b30000, #ff4d4d);
@@ -130,13 +132,14 @@ button,
 .btn,
 .shop-item-action,
 .nav-dropdown-link.logout-btn {
-  border: 1px solid var(--button-border);
+  background: var(--primary-gradient);
+  border: none;
   color: var(--button-text);
   border-radius: 6px;
   padding: 0.5rem 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  transition: background 0.25s ease, color 0.25s ease,  box-shadow 0.25s ease, scale 0.75 ease;
   appearance: none;
   -webkit-appearance: none;
 }
@@ -145,7 +148,7 @@ button:hover,
 .btn:hover,
 .shop-item-action:hover,
 .nav-dropdown-link.logout-btn:hover {
-  background: var(--button-hover-bg);
+  background: var(--primary-gradient-hover);
 }
 
 .title {
@@ -171,11 +174,19 @@ button:hover,
   border-radius: 10px;
   background-color: var(--container-bg);
 }
+.description-container,
+.description-card,
+.card {
+  border: 2px solid var(--card-border);
+  border-radius: 10px;
+  background-color: var(--container-bg);
+}
 
 .description-card {
   width: 100%;
   max-width: 900px;
   padding: 2rem;
+  border: none;
   background-color: var(--container-bg);
   border-radius: 10px;
   display: flex;
@@ -258,24 +269,23 @@ button:hover,
 }
 
 .card-button {
-  border: 1px solid var(--card-button-border);
-  background-color: var(--button-border);
+  border: 2px solid var(--card-button-border);
+  background: var(--primary-gradient);
   color: var(--button-text);
   border-radius: 6px;
   padding: 0.5rem 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  transition: 10s ease;
   display: inline-block;
   margin-top: 2rem;
 }
 
 .card-button:hover {
-  background-color: var(--button-hover-bg);
+  background: var(--primary-gradient-hover);
 }
 
 .card a {
-  color: var(--link-color);
   text-decoration: none;
 }
 
@@ -381,10 +391,9 @@ button:hover,
   margin-bottom: 1rem;
 }
 
-/* Buttons in modal */
 .modal-panel button {
   font-weight: bold;
-  padding: 0.6rem 1.2rem;
+  padding: 0.2rem 1.2rem;
   border-radius: 10px;
   border: none;
   cursor: pointer;
