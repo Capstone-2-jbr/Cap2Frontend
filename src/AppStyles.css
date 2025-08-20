@@ -30,7 +30,7 @@
   --footer-hover-bg: hsl(229, 100%, 30%);
   --shadow-light: rgba(0, 0, 0, 0.1);
   --shadow-dark: rgba(0, 0, 0, 0.2);
-  --nav-bg: #ffffff;
+  --nav-bg: #ffffffe3;
   --nav-border: rgba(255, 255, 255, 0.2);
   --nav-link: #0f172a;
   --nav-link-active: #2563eb;
@@ -278,12 +278,12 @@ button:hover,
 .card-button {
   border: 2px solid var(--card-button-border);
   background: var(--primary-gradient);
+  border-color: var(--card-border);
   color: var(--button-text);
   border-radius: 6px;
   padding: 0.5rem 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: 10s ease;
   display: inline-block;
   margin-top: 2rem;
 }
