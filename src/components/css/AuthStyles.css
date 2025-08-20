@@ -7,10 +7,8 @@
 }
 
 .auth-form {
-  background: white;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 400px;
 }
@@ -18,7 +16,7 @@
 .auth-form h2 {
   text-align: center;
   margin-bottom: 1.5rem;
-  color: #333;
+  color: #ffffff;
 }
 
 .form-group {
@@ -29,7 +27,7 @@
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
-  color: #555;
+  color: #ffffff;
 }
 
 .form-group input {
@@ -133,11 +131,11 @@
 .auth-link {
   text-align: right;
   margin-top: 1rem;
-  color: #666;
+  color: #ffffff;
 }
 
 .auth-link a {
-  color: #007bff;
+  color: #f200ff;
   text-decoration: none;
 }
 

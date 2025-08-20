@@ -66,7 +66,7 @@ const Signup = ({ setUser }) => {
       } catch (fetchError) {
         console.log("Could not fetch updated user data:", fetchError);
       }
-      
+
       navigate("/");
     } catch (error) {
       if (error.response?.data?.error) {
@@ -86,7 +86,6 @@ const Signup = ({ setUser }) => {
       [name]: value,
     }));
 
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors((prev) => ({
         ...prev,
@@ -96,69 +95,121 @@ const Signup = ({ setUser }) => {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-form">
-        <h2>Sign Up</h2>
+    <div
+      className="auth-container"
+      style={{
+        minHeight: "calc(100vh - var(--navbar-height, 64px))",
+        width: "100%",
+        padding: 0,
+        display: "flex",
+        alignItems: "stretch",
+        justifyContent: "space-between",
+        gap: 0,
+      }}
+    >
+      <section
+        style={{
+          flex: "0 1 48%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "flex-start",
+          paddingLeft: "clamp(2rem, 6vw, 7rem)",
+          paddingRight: "clamp(1rem, 3vw, 2rem)",
+        }}
+      >
+        <div
+          className="auth-form"
+          style={{
+            background: "transparent",
+            border: "none",
+            boxShadow: "none",
+            width: "min(420px, 92%)",
+            padding: "2rem",
+          }}
+        >
+          <h2>Sign Up</h2>
 
-        {errors.general && (
-          <div className="error-message">{errors.general}</div>
-        )}
+          {errors.general && (
+            <div className="error-message">{errors.general}</div>
+          )}
 
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="username">Username:</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
-              className={errors.username ? "error" : ""}
-            />
-            {errors.username && (
-              <span className="error-text">{errors.username}</span>
-            )}
-          </div>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="username">Username:</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                className={errors.username ? "error" : ""}
+              />
+              {errors.username && (
+                <span className="error-text">{errors.username}</span>
+              )}
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className={errors.password ? "error" : ""}
-            />
-            {errors.password && (
-              <span className="error-text">{errors.password}</span>
-            )}
-          </div>
+            <div className="form-group">
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className={errors.password ? "error" : ""}
+              />
+              {errors.password && (
+                <span className="error-text">{errors.password}</span>
+              )}
+            </div>
 
-          <div className="form-group">
-            <label htmlFor="confirmPassword">Confirm Password:</label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              className={errors.confirmPassword ? "error" : ""}
-            />
-            {errors.confirmPassword && (
-              <span className="error-text">{errors.confirmPassword}</span>
-            )}
-          </div>
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password:</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className={errors.confirmPassword ? "error" : ""}
+              />
+              {errors.confirmPassword && (
+                <span className="error-text">{errors.confirmPassword}</span>
+              )}
+            </div>
 
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? "Creating account..." : "Sign Up"}
-          </button>
-        </form>
+            <button type="submit" disabled={isLoading}>
+              {isLoading ? "Creating account..." : "Sign Up"}
+            </button>
+          </form>
 
-        <p className="auth-link">
-          Already have an account? <Link to="/login">Login</Link>
-        </p>
-      </div>
+          <p className="auth-link">
+            Already have an account? <Link to="/login">Login</Link>
+          </p>
+        </div>
+      </section>
+
+      <aside
+        style={{
+          position: "relative",
+          flex: "1 1 82%",
+          minHeight: "100%",
+          overflow: "hidden",
+        }}
+      >
+        <img
+          alt="Signup illustration"
+          src="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?_gl=1*bead1k*_ga*MTAxOTQwMTg5MC4xNzU1NjU5MDI4*_ga_8JE65Q40S6*czE3NTU2NTkwMjgkbzEkZzEkdDE3NTU2NTkwNDUkajQzJGwwJGgw"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
+        />
+      </aside>
     </div>
   );
 };
