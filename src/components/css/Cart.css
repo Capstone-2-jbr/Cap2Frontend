@@ -80,6 +80,8 @@
   align-items: center;
 }
 
+
+
 .qty-stepper {
   display: inline-flex;
   border: 1px solid rgba(0, 0, 0, 0.15);
@@ -132,6 +134,22 @@
   font-weight: 700;
   margin-top: 0.25rem;
 }
+.cart-toast {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 3000;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  color: #fff;
+  animation: cartToastIn 160ms ease-out;
+}
+.cart-toast.info { background: #2563eb; }
+.cart-toast.success { background: #16a34a; }
+.cart-toast.warn { background: #d97706; }
+@keyframes cartToastIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
 
 .checkout-btn {
   width: 100%;

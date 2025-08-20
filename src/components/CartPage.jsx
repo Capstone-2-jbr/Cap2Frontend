@@ -24,8 +24,40 @@ function QtyStepper({ value, onChange }) {
 export default function CartPage() {
   const { items, setQty, removeItem, clearCart, totals } = useCart();
 
+  const [toast, setToast] = React.useState(null);
+  const showToast = (msg, type = "info", ms = 2200) => {
+    setToast({ msg, type });
+    window.clearTimeout(showToast._t);
+    showToast._t = window.setTimeout(() => setToast(null), ms);
+  };
+
+  async function handleRemove(cart_item_id) {
+    await removeItem(cart_item_id);
+    showToast("Item removed from cart", "warn");
+  }
+
+  async function handleClear() {
+    if (items.length === 0) return;
+    const ok = window.confirm("Clear your entire cart?");
+    if (!ok) return;
+    await clearCart();
+    showToast("Cart cleared!", "success");
+  }
+
+  async function handleCheckout() {
+    if (items.length === 0) return;
+    showToast("Checkout successful!", "info");
+    await clearCart();
+  }
+
   return (
     <div className="cart-page">
+      {toast && (
+        <div className={`cart-toast ${toast.type}`}>
+          {toast.msg}
+        </div>
+      )}
+
       <h1>
         Your Cart ({items.length} {items.length === 1 ? "item" : "items"})
       </h1>
@@ -65,21 +97,24 @@ export default function CartPage() {
                     )}
                     <button
                       className="link danger"
-                      onClick={() => removeItem(it.cart_item_id)}
+                      onClick={() => handleRemove(it.cart_item_id)}
                     >
                       Remove
                     </button>
                   </div>
                 </div>
+
                 <div className="cart-price">
                   ${fmt(it.listing?.price_cents || 0)}
                 </div>
+
                 <div className="cart-qty">
                   <QtyStepper
                     value={it.quantity}
                     onChange={(q) => setQty(it.cart_item_id, q)}
                   />
                 </div>
+
                 <div className="cart-line-total">
                   ${fmt((it.listing?.price_cents || 0) * it.quantity)}
                 </div>
@@ -103,7 +138,7 @@ export default function CartPage() {
 
           <button
             className="clear-btn"
-            onClick={clearCart}
+            onClick={handleClear}
             disabled={items.length === 0}
           >
             Clear Cart
@@ -111,7 +146,7 @@ export default function CartPage() {
 
           <button
             className="checkout-btn"
-            onClick={() => alert("Checkout flow here!")}
+            onClick={handleCheckout}
             disabled={items.length === 0}
           >
             Check out

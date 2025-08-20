@@ -37,7 +37,7 @@ const SocialMedia = () => {
           onChange={(e) => setFilter(e.target.value)}
         />
         <button
-          className="CreatePost, create-post-btn" className=""
+          className="CreatePost" 
           onClick={() => setIsCreateOpen(true)}
         >
           Create Post
