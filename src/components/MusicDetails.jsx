@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./css/MusicDetails.css";
-//import styles from "/"
 import { API_URL } from "../shared";
 
 const MusicDetails = ({ videoId }) => {

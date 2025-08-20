@@ -1,0 +1,96 @@
+/* Queue Container */
+.queue-container {
+    padding: 1rem;
+    background: var(--panel-bg, #ffffff);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    max-height: 500px;
+    overflow-y: auto;
+  }
+  
+  /* Queue List */
+  .queue-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Queue Item */
+  .queue-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    margin-bottom: 6px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+    color: var(--text-color, #222);
+  }
+  
+  .queue-list li:hover {
+    background: rgba(0, 0, 0, 0.05);
+    transform: translateX(2px);
+  }
+  
+  .queue-list li.active {
+    background: var(--active-queue, rgba(30, 215, 96, 0.2)); /* highlight current track */
+    font-weight: bold;
+  }
+  
+  /* ✅ CD-style thumbnail */
+  .queue-thumbnail {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* circular */
+    object-fit: cover;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--card-border, #ddd);
+    transition: transform 0.2s ease;
+  }
+  
+  .queue-list li:hover .queue-thumbnail {
+    transform: rotate(5deg) scale(1.05);
+  }
+  
+  /* Track Title */
+  .track-title {
+    flex: 1;
+    font-size: 0.875rem;
+    color: var(--text-color, #222);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* Queue Actions */
+  .queue-actions button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--text-color, #222);
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+  
+  .queue-actions button:hover {
+    color: var(--danger-bg, red);
+    transform: scale(1.2);
+  }
+  
+  /* Scrollbar Styling */
+  .queue-container::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .queue-container::-webkit-scrollbar-track {
+    background: var(--secondary-bg, #f0f0f0);
+    border-radius: 3px;
+  }
+  
+  .queue-container::-webkit-scrollbar-thumb {
+    background: var(--primary-color, #1db954);
+    border-radius: 3px;
+  }
+  
+  

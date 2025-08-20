@@ -20,7 +20,7 @@ const PlaylistPage = () => {
   const fetchPlaylists = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`${API_URL}/api/playlists/`);
+      const res = await axios.get(`${API_URL}/api/playlists`);
       setPlaylists(res.data);
       setLoading(false);
     } catch (err) {

@@ -10,7 +10,7 @@ const Profile = () => {
     email: "",
     bio: "",
   });
-  const { userId } = useParams(); // Assuming userId is passed in the URL
+  const { userId } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [successMsg, setSuccessMsg] = useState(null);
@@ -21,10 +21,7 @@ const Profile = () => {
       setLoading(true);
       const response = await axios.get(
         `${API_URL}/api/users/profile/${userId}`,
-        {
-          withCredentials: true,
-          //params: { id: userId },
-        }
+        { withCredentials: true }
       );
       setFormData({
         username: response.data.username || "",
@@ -38,29 +35,6 @@ const Profile = () => {
       setLoading(false);
     }
   };
-
-  //   const fetchProfile = async () => {
-  //     await axios.get(`${API_URL}/api/users/profile`, { withCredentials: true })
-  //     .then((res) => {
-  //         if (!res.data) {
-  //           setError("No profile data found", res.data);
-  //           setLoading(false);
-  //           return;
-  //         }
-  //         setFormData({
-  //           username: res.data.username || "",
-  //           email: res.data.email || "",
-  //           bio: res.data.bio || "",
-  //         });
-  //         setLoading(false);
-  //       })
-  //       .catch((err) => {
-  //         setError("Failed to load profile");
-  //         setLoading(false);
-  //       });
-  //   };
-
-  //
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -77,9 +51,9 @@ const Profile = () => {
       await axios.put(`${API_URL}/api/users/profile`, formData, {
         withCredentials: true,
       });
-      setSuccessMsg("Profile updated successfully!");
+      setSuccessMsg("✅ Profile updated successfully!");
     } catch (err) {
-      setError("Failed to update profile");
+      setError("❌ Failed to update profile");
     }
   };
 
@@ -87,44 +61,61 @@ const Profile = () => {
     fetchProfile();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div className="profile-loading">
+        <div className="spinner"></div>
+        <p>Loading profile...</p>
+      </div>
+    );
+
   return (
     <div className="profile-container">
-      <h1>Your Profile</h1>
-      {error && <div className="error-msg">{error}</div>}
-      {successMsg && <div className="success-msg">{successMsg}</div>}
+      <div className="profile-card">
+        <h1 className="profile-title">Edit Your Profile</h1>
 
-      <form onSubmit={handleSubmit} className="profile-form">
-        <label>
-          Username:
-          <input
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
-        </label>
+        {error && <div className="error-msg">{error}</div>}
+        {successMsg && <div className="success-msg">{successMsg}</div>}
 
-        <label>
-          Email:
-          <input
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-        </label>
+        <form onSubmit={handleSubmit} className="profile-form">
+          <label className="profile-label">
+            Username
+            <input
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+              className="profile-input"
+            />
+          </label>
 
-        <label>
-          Bio:
-          <textarea name="bio" value={formData.bio} onChange={handleChange} />
-        </label>
+          <label className="profile-label">
+            Email
+            <input
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="profile-input"
+            />
+          </label>
 
-        <button type="submit" className="profile-submit-btn">
-          Save Changes
-        </button>
-      </form>
+          <label className="profile-label">
+            Bio
+            <textarea
+              name="bio"
+              value={formData.bio}
+              onChange={handleChange}
+              className="profile-textarea"
+            />
+          </label>
+
+          <button type="submit" className="profile-submit-btn">
+            Save Changes
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
